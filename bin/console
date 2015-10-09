@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+require 'bundler/setup'
+require 'global_registry_models'
+
+# You can add fixtures and/or initialization code here to make experimenting
+# with your gem easier. You can also use a different console, if you like.
+
+GlobalRegistry.access_token = 'set your token here'
+GlobalRegistry.base_url = 'https://stage-api.global-registry.org/'
+
+require 'pry'
+Pry.start
