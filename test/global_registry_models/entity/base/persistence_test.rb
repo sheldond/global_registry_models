@@ -2,42 +2,64 @@ require 'test_helper'
 
 class GlobalRegistryModelsEntityBasePersistenceTest < Minitest::Test
 
-  def test_create
+  def test_class_create
     entity = GlobalRegistryModels::Entity::Test.create name: 'Mr. Test', phone: '1800TEST', client_integration_id: '1'
     assert_instance_of GlobalRegistryModels::Entity::Test, entity
     assert_equal '0000-0000-0000-0001', entity.id
     assert_requested :post, 'https://test-api.global-registry.org/entities'
   end
 
-  def test_create_when_invalid
+  def test_class_create_when_invalid
     assert !GlobalRegistryModels::Entity::Test.create({})
     assert_not_requested :post, "https://test-api.global-registry.org/entities"
   end
 
-  def test_update_bang
+  def test_class_update_bang
     entity = GlobalRegistryModels::Entity::Test.update!('0000-0000-0000-0001', name: 'Mr. Test', phone: '1800TEST', client_integration_id: '1')
     assert_instance_of GlobalRegistryModels::Entity::Test, entity
     assert_equal '0000-0000-0000-0001', entity.id
     assert_requested :put, 'https://test-api.global-registry.org/entities/0000-0000-0000-0001'
   end
 
-  def test_update_bang_when_invalid
+  def test_class_update_bang_when_invalid
     assert_raises GlobalRegistryModels::Entity::RecordInvalid do
       GlobalRegistryModels::Entity::Test.update!('0000-0000-0000-0001', {})
     end
     assert_not_requested :put, "https://test-api.global-registry.org/entities/0000-0000-0000-0001"
   end
 
-  def test_update
+  def test_class_update
     entity = GlobalRegistryModels::Entity::Test.update '0000-0000-0000-0001', name: 'Mr. Test', phone: '1800TEST', client_integration_id: '1'
     assert_instance_of GlobalRegistryModels::Entity::Test, entity
     assert_equal '0000-0000-0000-0001', entity.id
     assert_requested :put, 'https://test-api.global-registry.org/entities/0000-0000-0000-0001'
   end
 
-  def test_update_when_invalid
+  def test_class_update_when_invalid
     assert !GlobalRegistryModels::Entity::Test.update('0000-0000-0000-0001', {})
-    assert_not_requested :put, "https://test-api.global-registry.org/entities/0000-0000-0000-0001"
+    assert_not_requested :put, 'https://test-api.global-registry.org/entities/0000-0000-0000-0001'
+  end
+
+  def test_update_bang
+    entity = GlobalRegistryModels::Entity::Test.new name: 'Name', phone: 'Phone', client_integration_id: '1', id: '0000-0000-0000-0001'
+    response = entity.update!(name: 'Mr. Test', phone: '1800TEST', client_integration_id: '1')
+    assert_instance_of GlobalRegistryModels::Entity::Test, response
+    assert_equal 'Mr. Test', response.name
+    assert_equal '1800TEST', response.phone
+    assert_equal '1', response.client_integration_id
+    assert_equal '0000-0000-0000-0001', response.id
+    assert :put, 'https://test-api.global-registry.org/entities/0000-0000-0000-0001'
+  end
+
+  def test_update_bang_without_client_integration_id
+    entity = GlobalRegistryModels::Entity::Test.new name: 'Name', phone: 'Phone', client_integration_id: '1', id: '0000-0000-0000-0001'
+    response = entity.update!(name: 'Mr. Test', phone: '1800TEST')
+    assert_instance_of GlobalRegistryModels::Entity::Test, response
+    assert_equal 'Mr. Test', response.name
+    assert_equal '1800TEST', response.phone
+    assert_equal '1', response.client_integration_id
+    assert_equal '0000-0000-0000-0001', response.id
+    assert :put, 'https://test-api.global-registry.org/entities/0000-0000-0000-0001'
   end
 
   def test_save_without_id

@@ -24,7 +24,7 @@ module GlobalRegistryModels
           end
 
           def update(id, attributes)
-            update!(id, attributes)
+            update! id, attributes
           rescue GlobalRegistryModels::Entity::RecordInvalid
             false
           end
@@ -40,7 +40,7 @@ module GlobalRegistryModels
         end
 
         def update!(attributes)
-          self.class.update! self.id, attributes
+          self.class.update! self.id, { client_integration_id: self.client_integration_id }.merge(attributes)
         end
 
       end
