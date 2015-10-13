@@ -11,6 +11,7 @@ module GlobalRegistryModels
       include ActiveModel::Validations
       include Virtus.model
 
+      include GlobalRegistryModels::Entity::APIOperations::Persistence
       include GlobalRegistryModels::Entity::APIOperations::Finders
       include GlobalRegistryModels::Entity::APIOperations::Search
       include GlobalRegistryModels::Entity::APIOperations::Delete
@@ -36,36 +37,9 @@ module GlobalRegistryModels
         [:id]
       end
 
-      def self.create(attributes)
-        attributes = attributes.except(:id)
-        if new(attributes).valid?
-          new GlobalRegistry::Entity.post({ entity: { name => attributes }})['entity'][name]
-        else
-          false
-        end
-      end
-
-      def self.update(id, attributes)
-        attributes = attributes.except(:id)
-        if new(attributes).valid?
-          new GlobalRegistry::Entity.put(id, { entity: { name => attributes }})['entity'][name]
-        else
-          false
-        end
-      end
-
       # The name of the entity class. The entity name is required in the api responses and requests, hence the need for this class method.
       def self.name
         to_s.gsub(/.*::/, '').underscore
-      end
-
-      def save
-        if valid?
-          result = id.present? ? self.class.update(id, attributes) : self.class.create(attributes)
-          result ? self.id = result.id : false
-        else
-          false
-        end
       end
 
     end
