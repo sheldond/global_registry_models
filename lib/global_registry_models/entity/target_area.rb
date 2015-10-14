@@ -35,7 +35,7 @@ module GlobalRegistryModels
       attribute :zip, String
 
       def self.identifying_attributes
-        [:name, :country, :state, :state]
+        [:name, :country, :state]
       end
 
       def self.writeable_attributes
