@@ -38,6 +38,10 @@ module GlobalRegistryModels
         [:name, :country, :state, :state]
       end
 
+      def self.writeable_attributes
+        super - [:gate, :highest_offering, :institution_type, :is_closed]
+      end
+
       def to_s
         name
       end

@@ -17,7 +17,8 @@ module GlobalRegistryModels
           def update!(id, attributes)
             entity = new(attributes)
             if entity.valid?
-              update_attributes = entity.attributes.with_indifferent_access.slice(*attributes.keys).except(:id)
+              attribute_keys_to_update = (attributes.keys.collect(&:to_sym) << :client_integration_id) & writeable_attributes
+              update_attributes = entity.attributes.with_indifferent_access.slice(*attribute_keys_to_update)
               new GlobalRegistry::Entity.put(id, { entity: { name => update_attributes }})['entity'][name]
             else
               raise GlobalRegistryModels::Entity::RecordInvalid.new
@@ -41,7 +42,7 @@ module GlobalRegistryModels
         end
 
         def update!(update_attributes)
-          self.class.update! id, attributes.with_indifferent_access.merge(update_attributes)
+          self.class.update! id, { client_integration_id: client_integration_id }.with_indifferent_access.merge(update_attributes)
         end
 
       end

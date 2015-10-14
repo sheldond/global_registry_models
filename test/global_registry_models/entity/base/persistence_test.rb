@@ -45,6 +45,11 @@ class GlobalRegistryModelsEntityBasePersistenceTest < Minitest::Test
     assert_requested :put, 'https://test-api.global-registry.org/entities/0000-0000-0000-0001', body: '{"entity":{"test":{"client_integration_id":"1","is_active":false}}}'
   end
 
+  def test_class_update_only_updates_writeable_attributes
+    assert GlobalRegistryModels::Entity::Test.update('0000-0000-0000-0001', id: 'trying-to-update-id', client_integration_id: 1, is_active: '0')
+    assert_requested :put, 'https://test-api.global-registry.org/entities/0000-0000-0000-0001', body: '{"entity":{"test":{"client_integration_id":"1","is_active":false}}}'
+  end
+
   def test_update_bang
     entity = GlobalRegistryModels::Entity::Test.new name: 'Name', phone: 'Phone', client_integration_id: '1', id: '0000-0000-0000-0001'
     response = entity.update!(name: 'Mr. Test', phone: '1800TEST', client_integration_id: '1')

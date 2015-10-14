@@ -37,6 +37,10 @@ module GlobalRegistryModels
         [:id]
       end
 
+      def self.writeable_attributes
+        attribute_names - [:id]
+      end
+
       # The name of the entity class. The entity name is required in the api responses and requests, hence the need for this class method.
       def self.name
         to_s.gsub(/.*::/, '').underscore

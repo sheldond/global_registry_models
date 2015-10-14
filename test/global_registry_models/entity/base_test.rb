@@ -15,6 +15,10 @@ class GlobalRegistryModelsEntityBaseTest < Minitest::Test
     assert_equal [:id, :client_integration_id, :phone, :name, :is_active], GlobalRegistryModels::Entity::Test.filterable_attributes
   end
 
+  def test_writeable_attributes
+    assert_equal [:client_integration_id, :phone, :name, :is_active], GlobalRegistryModels::Entity::Test.writeable_attributes
+  end
+
   def test_initialize_ignores_non_attribute_keys
     tester = GlobalRegistryModels::Entity::Test.new name: 'Mr. Test', my_favourite_colour: 'blue'
     assert_equal({ id: nil, client_integration_id: nil, name: 'Mr. Test', phone: nil, is_active: nil }, tester.attributes)
