@@ -64,9 +64,9 @@ class GlobalRegistryModelsEntityCollectionTest < Minitest::Test
 
   def test_to_csv
     assert_equal <<-CSV.strip_heredoc, test_collection_first_page.to_csv
-      client_integration_id,id,name,phone
-      1234,0000-0000-0000-0001,Mr. Test,+1234567890
-      2222,0000-0000-0000-0002,Count Testalot,1800TEST
+      client_integration_id,id,is_active,name,phone
+      1234,0000-0000-0000-0001,true,Mr. Test,+1234567890
+      2222,0000-0000-0000-0002,true,Count Testalot,1800TEST
     CSV
   end
 

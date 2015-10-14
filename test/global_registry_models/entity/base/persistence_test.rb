@@ -40,6 +40,11 @@ class GlobalRegistryModelsEntityBasePersistenceTest < Minitest::Test
     assert_not_requested :put, 'https://test-api.global-registry.org/entities/0000-0000-0000-0001'
   end
 
+  def test_class_update_coerces_attributes
+    assert GlobalRegistryModels::Entity::Test.update('0000-0000-0000-0001', client_integration_id: 1, is_active: '0')
+    assert_requested :put, 'https://test-api.global-registry.org/entities/0000-0000-0000-0001', body: '{"entity":{"test":{"client_integration_id":"1","is_active":false}}}'
+  end
+
   def test_update_bang
     entity = GlobalRegistryModels::Entity::Test.new name: 'Name', phone: 'Phone', client_integration_id: '1', id: '0000-0000-0000-0001'
     response = entity.update!(name: 'Mr. Test', phone: '1800TEST', client_integration_id: '1')
@@ -65,7 +70,7 @@ class GlobalRegistryModelsEntityBasePersistenceTest < Minitest::Test
   def test_save_without_id
     entity = GlobalRegistryModels::Entity::Test.new name: 'Mr. Test', phone: '1800TEST', client_integration_id: '1'
     assert entity.save
-    assert ({ id: '0000-0000-0000-0001', name: 'Mr. Test', phone: '1800TEST', client_integration_id: '1' } == entity.attributes)
+    assert_equal({ id: '0000-0000-0000-0001', name: 'Mr. Test', phone: '1800TEST', client_integration_id: '1', is_active: nil }, entity.attributes)
     assert_requested :post, 'https://test-api.global-registry.org/entities'
   end
 
@@ -74,7 +79,7 @@ class GlobalRegistryModelsEntityBasePersistenceTest < Minitest::Test
     entity.phone = '1800TEST'
     entity.client_integration_id = '1'
     assert entity.save
-    assert ({ id: '0000-0000-0000-0001', name: 'Mr. Test', phone: '1800TEST', client_integration_id: '1' } == entity.attributes)
+    assert_equal({ id: '0000-0000-0000-0001', name: 'Mr. Test', phone: '1800TEST', client_integration_id: '1', is_active: true }, entity.attributes)
     assert_requested :put, 'https://test-api.global-registry.org/entities/0000-0000-0000-0001'
   end
 

@@ -22,6 +22,7 @@ module GlobalRegistryModels
       attribute :id, String
       attribute :phone, String
       attribute :name, String
+      attribute :is_active, Boolean
     end
   end
 end

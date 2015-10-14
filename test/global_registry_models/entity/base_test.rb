@@ -12,34 +12,34 @@ class GlobalRegistryModelsEntityBaseTest < Minitest::Test
   end
 
   def test_filterable_attributes
-    assert_equal [:id, :client_integration_id, :phone, :name], GlobalRegistryModels::Entity::Test.filterable_attributes
+    assert_equal [:id, :client_integration_id, :phone, :name, :is_active], GlobalRegistryModels::Entity::Test.filterable_attributes
   end
 
   def test_initialize_ignores_non_attribute_keys
     tester = GlobalRegistryModels::Entity::Test.new name: 'Mr. Test', my_favourite_colour: 'blue'
-    assert ({ id: nil, client_integration_id: nil, name: 'Mr. Test', phone: nil } == tester.attributes)
+    assert_equal({ id: nil, client_integration_id: nil, name: 'Mr. Test', phone: nil, is_active: nil }, tester.attributes)
   end
 
   def test_attribute_names
-    assert_equal [:id, :client_integration_id, :phone, :name], GlobalRegistryModels::Entity::Test.attribute_names
+    assert_equal [:id, :client_integration_id, :phone, :name, :is_active], GlobalRegistryModels::Entity::Test.attribute_names
   end
 
   def test_attributes
     tester = GlobalRegistryModels::Entity::Test.new name: 'Mr. Test', phone: '1-800-TEST-MEYO'
-    assert ({ id: nil, client_integration_id: nil, name: 'Mr. Test', phone: '1-800-TEST-MEYO' } == tester.attributes)
+    assert_equal({ id: nil, client_integration_id: nil, name: 'Mr. Test', phone: '1-800-TEST-MEYO', is_active: nil }, tester.attributes)
     tester.name = 'Count Test'
-    assert ({ id: nil, client_integration_id: nil, name: 'Count Test', phone: '1-800-TEST-MEYO' } == tester.attributes)
+    assert_equal({ id: nil, client_integration_id: nil, name: 'Count Test', phone: '1-800-TEST-MEYO', is_active: nil }, tester.attributes)
   end
 
   def test_attributes=
     tester = GlobalRegistryModels::Entity::Test.new name: 'Mr. Test', phone: '1-800-TEST-MEYO'
-    assert ({ id: nil, client_integration_id: nil, name: 'Mr. Test', phone: '1-800-TEST-MEYO' } == tester.attributes)
+    assert_equal({ id: nil, client_integration_id: nil, name: 'Mr. Test', phone: '1-800-TEST-MEYO', is_active: nil }, tester.attributes)
     tester.attributes = { name: 'Ms. Test', phone: '123.4567' }
-    assert ({ id: nil, client_integration_id: nil, name: 'Ms. Test', phone: '123.4567' } == tester.attributes)
+    assert_equal({ id: nil, client_integration_id: nil, name: 'Ms. Test', phone: '123.4567', is_active: nil }, tester.attributes)
     tester.attributes = {}
-    assert ({ id: nil, client_integration_id: nil, name: 'Ms. Test', phone: '123.4567' } == tester.attributes)
+    assert_equal({ id: nil, client_integration_id: nil, name: 'Ms. Test', phone: '123.4567', is_active: nil }, tester.attributes)
     tester.attributes = { name: 'Sir Test' }
-    assert ({ id: nil, client_integration_id: nil, name: 'Sir Test', phone: '123.4567' } == tester.attributes)
+    assert_equal({ id: nil, client_integration_id: nil, name: 'Sir Test', phone: '123.4567', is_active: nil }, tester.attributes)
   end
 
   def test_name
