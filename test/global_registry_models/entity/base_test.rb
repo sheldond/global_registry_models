@@ -12,7 +12,7 @@ class GlobalRegistryModelsEntityBaseTest < Minitest::Test
   end
 
   def test_filterable_attributes
-    assert_equal [:id, :client_integration_id, :phone, :name, :is_active], GlobalRegistryModels::Entity::Test.filterable_attributes
+    assert_equal [:client_integration_id, :phone, :name, :is_active], GlobalRegistryModels::Entity::Test.filterable_attributes
   end
 
   def test_writeable_attributes

@@ -30,7 +30,7 @@ module GlobalRegistryModels
       end
 
       def self.filterable_attributes
-        attribute_names
+        attribute_names - [:id]
       end
 
       def self.identifying_attributes
