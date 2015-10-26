@@ -26,7 +26,7 @@ module GlobalRegistryModels
               params.merge! filter_params_hash
             end
 
-            response = GlobalRegistryModels::ResponseParser.new Retryer.new(RestClient::InternalServerError).try { GlobalRegistry::Entity.get(params) }
+            response = GlobalRegistryModels::ResponseParser.new(GlobalRegistry::Entity.get(params))
             Entity::Collection.new meta: response.meta, entities: response.entities
           end
 
