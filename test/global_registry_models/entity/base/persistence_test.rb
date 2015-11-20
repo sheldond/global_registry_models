@@ -2,6 +2,30 @@ require 'test_helper'
 
 class GlobalRegistryModelsEntityBasePersistenceTest < Minitest::Test
 
+  def test_class_create_bang
+    entity = GlobalRegistryModels::Entity::Test.create!(name: 'Mr. Test', phone: '1800TEST', client_integration_id: '1')
+    assert_instance_of GlobalRegistryModels::Entity::Test, entity
+    assert_equal '0000-0000-0000-0001', entity.id
+    assert_requested :post, 'https://test-api.global-registry.org/entities'
+  end
+
+  def test_class_create_bang_when_invalid
+    assert_raises GlobalRegistryModels::Entity::RecordInvalid do
+      GlobalRegistryModels::Entity::Test.create!({})
+    end
+    assert_not_requested :post, 'https://test-api.global-registry.org/entities'
+  end
+
+  def test_class_create_coerces_attributes
+    assert GlobalRegistryModels::Entity::Test.create(client_integration_id: 1, is_active: '0')
+    assert_requested :post, 'https://test-api.global-registry.org/entities', body: '{"entity":{"test":{"client_integration_id":"1","is_active":false}}}'
+  end
+
+  def test_class_create_only_updates_writeable_attributes
+    assert GlobalRegistryModels::Entity::Test.create(id: 'trying-to-update-id', client_integration_id: 1, is_active: '0')
+    assert_requested :post, 'https://test-api.global-registry.org/entities', body: '{"entity":{"test":{"client_integration_id":"1","is_active":false}}}'
+  end
+
   def test_class_create
     entity = GlobalRegistryModels::Entity::Test.create name: 'Mr. Test', phone: '1800TEST', client_integration_id: '1'
     assert_instance_of GlobalRegistryModels::Entity::Test, entity

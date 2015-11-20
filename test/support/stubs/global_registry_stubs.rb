@@ -118,6 +118,10 @@ module GlobalRegistryStubs
       with(:body => "{\"entity\":{\"test\":{\"client_integration_id\":\"1\",\"phone\":\"1800TEST\",\"name\":\"Mr. Test\",\"is_active\":null}}}",
            :headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer test', 'Content-Length'=>'103', 'Content-Type'=>'application/json', 'Timeout'=>'-1', 'User-Agent'=>'Ruby'}).
       to_return(:status => 200, :body => "{\"entity\":{\"test\":{\"id\":\"0000-0000-0000-0001\",\"name\":\"Mr. Test\",\"phone\":\"1800TEST\",\"client_integration_id\":\"1\",\"is_active\":true}}}", :headers => {})
+    stub_request(:post, "https://test-api.global-registry.org/entities").
+      with(:body => "{\"entity\":{\"test\":{\"client_integration_id\":\"1\",\"is_active\":false}}}",
+           :headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer test', 'Content-Length'=>'67', 'Content-Type'=>'application/json', 'Timeout'=>'-1', 'User-Agent'=>'Ruby'}).
+      to_return(:status => 200, :body => "{\"entity\":{\"test\":{\"id\":\"0000-0000-0000-0001\",\"client_integration_id\":\"1\",\"is_active\":false}}}", :headers => {})
 
     # Update a "test" entity
     stub_request(:put, "https://test-api.global-registry.org/entities/0000-0000-0000-0001").

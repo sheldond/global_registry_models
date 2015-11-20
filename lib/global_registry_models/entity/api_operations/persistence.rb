@@ -5,13 +5,21 @@ module GlobalRegistryModels
         extend ActiveSupport::Concern
 
         module ClassMethods
-          def create(attributes)
-            attributes = attributes.with_indifferent_access.except(:id)
-            if new(attributes).valid?
-              new GlobalRegistry::Entity.post({ entity: { name => attributes }})['entity'][name]
+          def create!(attributes)
+            entity = new(attributes.with_indifferent_access.except(:id))
+            if entity.valid?
+              attribute_keys_to_create = attributes.keys.collect(&:to_sym) & writeable_attributes
+              create_attributes = entity.attributes.with_indifferent_access.slice(*attribute_keys_to_create)
+              new GlobalRegistry::Entity.post({ entity: { name => create_attributes }})['entity'][name]
             else
-              false
+              raise GlobalRegistryModels::Entity::RecordInvalid.new
             end
+          end
+
+          def create(attributes)
+            create! attributes
+          rescue GlobalRegistryModels::Entity::RecordInvalid
+            false
           end
 
           def update!(id, attributes)
