@@ -1,13 +1,47 @@
 module GlobalRegistryModels
   module Entity
     class Ministry < Base
-      attribute :country, String
+      attribute :abbreviation, String
+      attribute :address1, String
+      attribute :address2, String
       attribute :city, String
-      attribute :is_active, String
+      attribute :country, String
+      attribute :currency_code, String
+      attribute :currency_symbol, String
+      attribute :dataserver_url, String
+      attribute :dta, String
+      attribute :fiscal_start_month, Integer
+      attribute :gma_status, String
+      attribute :has_ds, Boolean
+      attribute :has_gcm, Boolean
+      attribute :has_lim, Boolean
+      attribute :has_slm, Boolean
+      attribute :is_active, Boolean
+      attribute :is_fcx, Boolean
+      attribute :is_secure, Boolean
+      attribute :lane, String
+      attribute :last_dataserver_donation, String
+      attribute :last_dataserver_transaction, String
+      attribute :last_financial_report, String
+      attribute :lmi_hide, String
+      attribute :lmi_show, String
       attribute :location, String
+      attribute :location_zoom, Integer
+      attribute :logo_url, String
+      attribute :measurement_status, String
       attribute :min_code, String
-      attribute :name, String
+      attribute :ministry_brand, String
+      attribute :ministry_scope, String
       attribute :ministry_type, String
+      attribute :name, String
+      attribute :note, String
+      attribute :phone, String
+      attribute :registered_name, String
+      attribute :sp_phone, String
+      attribute :stage, Integer
+      attribute :state, String
+      attribute :url, String
+      attribute :zip, String
 
       def self.identifying_attributes
         [:name, :country, :city, :min_code]
@@ -19,5 +53,3 @@ module GlobalRegistryModels
     end
   end
 end
-
-
