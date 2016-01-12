@@ -13,7 +13,7 @@ class GlobalRegistryModelsEntityEntityTypeTest < Minitest::Test
     assert_instance_of GlobalRegistryModels::Entity::EntityType, entity_type
     assert_instance_of GlobalRegistryModels::Entity::Field, entity_type.fields.first
     assert_equal entity_type.fields.first.name, "first_field"
-    assert_equal entity_type.fields.first.name, "first_field"
+    assert_equal entity_type.fields.first.id, "a740308a-7412-11e4-92c1-8f55e068e2dd"
   end
 
 end
