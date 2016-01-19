@@ -5,19 +5,19 @@ module GlobalRegistryModels
     include Enumerable
     extend Forwardable
 
-    def_delegators :@entities, :[], :size, :concat, :blank?, :present?
+    def_delegators :@list, :[], :size, :concat, :blank?, :present?
 
-    def initialize(meta:, entities:)
+    def initialize(meta:, list:)
       @meta = meta
-      @entities = entities
+      @list = list
     end
 
     def each
-      @entities.each { |entity| yield entity }
+      @list.each { |object| yield object }
     end
 
     def all
-      @entities
+      @list
     end
 
     def page
@@ -54,9 +54,9 @@ module GlobalRegistryModels
 
     def to_csv
       CSV.generate do |csv|
-        attributes = @entities.first.attributes.collect(&:first).sort
+        attributes = @list.first.attributes.collect(&:first).sort
         csv << attributes
-        @entities.each do |entity|
+        @list.each do |entity|
           csv << attributes.collect { |attribute| entity.attributes[attribute] }
         end
       end

@@ -24,7 +24,7 @@ class GlobalRegistryModelsEntityBaseFindersTest < Minitest::Test
 
   def test_page
     found = GlobalRegistryModels::Entity::Test.page 1
-    assert_instance_of GlobalRegistryModels::Entity::Collection, found
+    assert_instance_of GlobalRegistryModels::Collection, found
     found.all? { |f| assert_instance_of(GlobalRegistryModels::Entity::Test, f) }
     assert_requested :get, 'https://test-api.global-registry.org/entities?entity_type=test&page=1'
   end

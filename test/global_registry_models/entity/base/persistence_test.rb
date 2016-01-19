@@ -10,7 +10,7 @@ class GlobalRegistryModelsEntityBasePersistenceTest < Minitest::Test
   end
 
   def test_class_create_bang_when_invalid
-    assert_raises GlobalRegistryModels::Entity::RecordInvalid do
+    assert_raises GlobalRegistryModels::RecordInvalid do
       GlobalRegistryModels::Entity::Test.create!({})
     end
     assert_not_requested :post, 'https://test-api.global-registry.org/entities'
@@ -46,7 +46,7 @@ class GlobalRegistryModelsEntityBasePersistenceTest < Minitest::Test
   end
 
   def test_class_update_bang_when_invalid
-    assert_raises GlobalRegistryModels::Entity::RecordInvalid do
+    assert_raises GlobalRegistryModels::RecordInvalid do
       GlobalRegistryModels::Entity::Test.update!('0000-0000-0000-0001', {})
     end
     assert_not_requested :put, "https://test-api.global-registry.org/entities/0000-0000-0000-0001"

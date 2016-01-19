@@ -12,13 +12,13 @@ module GlobalRegistryModels
               create_attributes = entity.attributes.with_indifferent_access.slice(*attribute_keys_to_create)
               new GlobalRegistry::Entity.post({ entity: { name => create_attributes }})['entity'][name]
             else
-              raise GlobalRegistryModels::Entity::RecordInvalid.new
+              raise GlobalRegistryModels::RecordInvalid.new
             end
           end
 
           def create(attributes)
             create! attributes
-          rescue GlobalRegistryModels::Entity::RecordInvalid
+          rescue GlobalRegistryModels::RecordInvalid
             false
           end
 
@@ -29,13 +29,13 @@ module GlobalRegistryModels
               update_attributes = entity.attributes.with_indifferent_access.slice(*attribute_keys_to_update)
               new GlobalRegistry::Entity.put(id, { entity: { name => update_attributes }})['entity'][name]
             else
-              raise GlobalRegistryModels::Entity::RecordInvalid.new
+              raise GlobalRegistryModels::RecordInvalid.new
             end
           end
 
           def update(id, attributes)
             update! id, attributes
-          rescue GlobalRegistryModels::Entity::RecordInvalid
+          rescue GlobalRegistryModels::RecordInvalid
             false
           end
         end

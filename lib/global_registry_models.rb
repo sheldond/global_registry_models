@@ -7,6 +7,8 @@ require 'global_registry_models/retryer'
 require 'global_registry_models/collection'
 require 'global_registry_models/common_base'
 
+require 'global_registry_models/errors/record_invalid'
+
 require 'global_registry_models/api_operations/persistence'
 require 'global_registry_models/api_operations/finders'
 require 'global_registry_models/api_operations/search'
@@ -24,8 +26,6 @@ require 'global_registry_models/entity/iso_country'
 require 'global_registry_models/entity/ministry'
 require 'global_registry_models/entity/target_area'
 
-require 'global_registry_models/entity/errors/record_invalid'
-
 require 'global_registry_models/entity_type/api_operations/persistence'
 require 'global_registry_models/entity_type/api_operations/finders'
 require 'global_registry_models/entity_type/api_operations/search'
@@ -34,8 +34,6 @@ require 'global_registry_models/entity_type/api_operations/delete'
 require 'global_registry_models/entity_type/base'
 require 'global_registry_models/entity_type/entity_type'
 require 'global_registry_models/entity_type/field'
-
-require 'global_registry_models/entity_type/errors/record_invalid'
 
 module GlobalRegistryModels
 end

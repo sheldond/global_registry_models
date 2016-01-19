@@ -3,7 +3,7 @@ require 'test_helper'
 class GlobalRegistryModelsEntityCollectionTest < Minitest::Test
 
   def test_new
-    collection = GlobalRegistryModels::Collection.new meta: {}, entities: [1, 2, 3]
+    collection = GlobalRegistryModels::Collection.new meta: {}, list: [1, 2, 3]
     assert_instance_of GlobalRegistryModels::Collection, collection
   end
 
