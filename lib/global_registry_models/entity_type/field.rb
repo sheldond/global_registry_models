@@ -1,5 +1,5 @@
 module GlobalRegistryModels
-  module Entity
+  module EntityType
     class Field < Base
       attribute :id, String
       attribute :name, String
