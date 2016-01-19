@@ -5,9 +5,10 @@ module GlobalRegistryModels
         extend ActiveSupport::Concern
 
         module ClassMethods
+          include GlobalRegistryModels::APIOperations
 
           def search(filters: nil, page: nil, per_page: nil, order: nil, fields: nil, ruleset: nil)
-            GlobalRegistryModels::APIOperations::Search("EntityType", name, page, per_page, order, fields, ruleset)
+            common_search("EntityType", filters, name, page, per_page, order, fields, ruleset)
           end
 
         end

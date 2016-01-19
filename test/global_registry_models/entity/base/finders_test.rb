@@ -4,7 +4,7 @@ class GlobalRegistryModelsEntityBaseFindersTest < Minitest::Test
 
   def test_all!
     found = GlobalRegistryModels::Entity::Test.all!
-    assert_instance_of GlobalRegistryModels::Entity::Collection, found
+    assert_instance_of GlobalRegistryModels::Collection, found
     assert_equal 4, found.size
     found.each do |entity|
       assert_instance_of GlobalRegistryModels::Entity::Test, entity
