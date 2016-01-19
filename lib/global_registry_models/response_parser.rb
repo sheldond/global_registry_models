@@ -10,23 +10,30 @@ module GlobalRegistryModels
     end
 
     def entities
-      @entities ||= build_objects('entities')
+      @entities ||= build_entities
     end
 
-     def entity_types
-      @entity_types ||= build_objects('entity_types')
+    def entity_types
+      @entity_types ||= build_entity_types
     end
 
     private
 
-      def build_objects(object_class)
-        @response_hash[object_class].collect(&:flatten).collect do |object_type, object_attributes|
+      def build_entities
+        @response_hash['entities'].collect(&:flatten).collect do |object_type, object_attributes|
           entity_class(object_type).new(object_attributes)
         end
       end
 
+      def build_entity_types
+        @response_hash['entity_types'].collect do |object_attributes|
+          puts object_attributes.to_s
+          GlobalRegistryModels::EntityType::EntityType.new(object_attributes.to_s)
+        end
+      end
+
       def entity_class(entity_type_string)
-        "GlobalRegistryModels::Entity::#{ entity_type_string.classify }".constantize
+        return "GlobalRegistryModels::Entity::#{ entity_type_string.classify }".constantize 
       end
   end
 end

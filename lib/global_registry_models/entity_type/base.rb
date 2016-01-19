@@ -1,7 +1,6 @@
 # A base class providing CRUD for GlobalRegistry Entities.
 # API doc at https://github.com/CruGlobal/global_registry_docs/wiki/Entities
 
-require 'virtus'
 
 module GlobalRegistryModels
   module EntityType

@@ -1,9 +1,7 @@
 # A base class providing CRUD for GlobalRegistry Entities.
 # API doc at https://github.com/CruGlobal/global_registry_docs/wiki/Entities
 
-require 'active_model'
-require 'virtus'
-require 'global_registry_models/common_base.rb'
+
 
 module GlobalRegistryModels
   module Entity

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class GlobalRegistryModelsEntityCollectionTest < Minitest::Test
+class GlobalRegistryModelsCollectionTest < Minitest::Test
 
   def test_new
     collection = GlobalRegistryModels::Collection.new meta: {}, list: [1, 2, 3]

@@ -25,5 +25,13 @@ module GlobalRegistryModels
       attribute :is_active, Boolean
     end
   end
+
+  module EntityType
+    class Test < EntityType
+      attribute :id, String
+      attribute :name, String
+      attribute :is_active, Boolean
+    end
+  end
 end
 
