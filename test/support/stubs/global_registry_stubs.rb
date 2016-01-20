@@ -193,8 +193,8 @@ module GlobalRegistryStubs
               "field_type":"string",
               "is_editable":false,
               "unique_value":false
-              },
-              {"id":"addb95ba-d557-11e3-8422-12725f8f377c",
+              },{
+              "id":"addb95ba-d557-11e3-8422-12725f8f377c",
               "name":"sp_phone",
               "data_visibility":"public",
               "field_type":"string",

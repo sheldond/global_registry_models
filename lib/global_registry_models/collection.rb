@@ -16,6 +16,14 @@ module GlobalRegistryModels
       @list.each { |object| yield object }
     end
 
+    def first
+      @list.first
+    end
+
+    def last
+      @list.last
+    end
+
     def all
       @list
     end

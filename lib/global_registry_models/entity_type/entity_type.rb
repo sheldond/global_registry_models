@@ -5,10 +5,14 @@ module GlobalRegistryModels
       attribute :name, String
       attribute :description, Boolean
       attribute :is_editable, Boolean
+      attribute :field_type, String
+      attribute :data_visibility, String
+      attribute :enum_values, Array
+      attribute :unique_value, Boolean
 
       def initialize(params = {})
         super(params)
-        create_fields(params[:fields]) if params[:fields]
+        create_fields(params["fields"]) if params["fields"]
       end
 
       def fields

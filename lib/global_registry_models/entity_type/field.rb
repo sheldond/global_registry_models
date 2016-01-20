@@ -8,14 +8,9 @@ module GlobalRegistryModels
       attribute :is_editable, Boolean
       attribute :field_type, String
 
-
-      def initialize(id: nil, name: nil, description: nil, field_type: nil, is_editable: nil, fields: nil)
-        @id=id
-        @name=name
-        @field_type=field_type
-        @is_editable=is_editable
-        @description=description
-        create_children fields if fields
+      def initialize(params = {})
+        super(params)
+        create_children(params["fields"]) if params["fields"]
       end
 
       def fields
