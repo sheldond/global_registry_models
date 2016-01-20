@@ -25,7 +25,6 @@ module GlobalRegistryModels
 
       def build_entity_types
         @response_hash['entity_types'].collect do |object_attributes|
-          puts object_attributes.to_s
           GlobalRegistryModels::EntityType::EntityType.new(object_attributes)
         end
       end

@@ -6,10 +6,14 @@ module GlobalRegistryModels
   module EntityType
     class Base < CommonBase
 
-      def search_params
+      def self.search_params
         {
-          entity_name: name
+          field_type: "entity"
         }
+      end
+
+      def self.global_registry_resource
+        GlobalRegistry::EntityType
       end
 
     end
