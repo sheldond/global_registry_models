@@ -9,12 +9,10 @@ module GlobalRegistryModels
       @response_hash['meta']
     end
 
-    def entities
-      @entities ||= build_entities
-    end
-
-    def entity_types
-      @entity_types ||= build_entity_types
+    def objects
+      @objects ||= build_entity_types if @response_hash['entity_types']
+      @objects ||= build_entities if @response_hash['entities']
+      @objects
     end
 
     private
@@ -28,7 +26,7 @@ module GlobalRegistryModels
       def build_entity_types
         @response_hash['entity_types'].collect do |object_attributes|
           puts object_attributes.to_s
-          GlobalRegistryModels::EntityType::EntityType.new(object_attributes.to_s)
+          GlobalRegistryModels::EntityType::EntityType.new(object_attributes)
         end
       end
 

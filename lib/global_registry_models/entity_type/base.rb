@@ -6,10 +6,11 @@ module GlobalRegistryModels
   module EntityType
     class Base < CommonBase
 
-      include GlobalRegistryModels::EntityType::APIOperations::Persistence
-      include GlobalRegistryModels::EntityType::APIOperations::Finders
-      include GlobalRegistryModels::EntityType::APIOperations::Search
-      include GlobalRegistryModels::EntityType::APIOperations::Delete
+      def search_params
+        {
+          entity_name: name
+        }
+      end
 
     end
   end

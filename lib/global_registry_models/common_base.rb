@@ -10,6 +10,12 @@ module GlobalRegistryModels
     include ActiveModel::Validations
     include Virtus.model
 
+    include GlobalRegistryModels::APIOperations::Persistence
+    include GlobalRegistryModels::APIOperations::Finders
+    include GlobalRegistryModels::APIOperations::Search
+    include GlobalRegistryModels::APIOperations::Delete
+
+
     attribute :id, String
     attribute :client_integration_id, String
 

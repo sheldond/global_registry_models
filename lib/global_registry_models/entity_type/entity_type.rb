@@ -6,13 +6,9 @@ module GlobalRegistryModels
       attribute :description, Boolean
       attribute :is_editable, Boolean
 
-
-      def initialize(id:, name: nil, is_editable: nil, description: nil, fields: nil)
-        @id=id
-        @name=name
-        @is_editable=is_editable
-        @description=description
-        create_fields fields if fields
+      def initialize(params = {})
+        super(params)
+        create_fields(params[:fields]) if params[:fields]
       end
 
       def fields
