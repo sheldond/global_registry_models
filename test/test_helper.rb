@@ -25,14 +25,5 @@ module GlobalRegistryModels
       attribute :is_active, Boolean
     end
   end
-
-  module EntityType
-    class Test < Base
-      attribute :id, String
-      attribute :phone, String
-      attribute :name, String
-      attribute :is_active, Boolean
-    end
-  end
 end
 

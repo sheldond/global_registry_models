@@ -152,7 +152,7 @@ module GlobalRegistryStubs
       to_return(:status => 200, :body => "{\"entity\":{\"test\":{\"id\":\"0000-0000-0000-0001\",\"name\":\"Mr. Test\",\"phone\":\"1800TEST\",\"client_integration_id\":\"1\",\"is_active\":null}}}", :headers => {})
 
 
-      # Get test entity types
+    # Get test entity types
     stub_request(:get, /https:\/\/test-api.global-registry.org\/entity_types\?field_type=entity*/).
       with(headers: {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer test', 'User-Agent'=>'Ruby'}).
       to_return(status: 200, headers: {}, body: %({
