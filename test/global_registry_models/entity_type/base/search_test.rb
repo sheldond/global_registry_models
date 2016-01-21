@@ -7,6 +7,7 @@ class GlobalRegistryModelsEntityTypesBaseSearchTest < Minitest::Test
     assert_instance_of GlobalRegistryModels::Collection, found
     assert_instance_of GlobalRegistryModels::EntityType::EntityType, found.first
     assert_instance_of GlobalRegistryModels::EntityType::Field, found.last.fields.first
+    assert_instance_of GlobalRegistryModels::EntityType::Field, found.last.fields.first.fields.first
     assert_requested :get, 'https://test-api.global-registry.org/entity_types?field_type=entity'
 
   end

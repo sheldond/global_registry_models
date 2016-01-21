@@ -185,7 +185,22 @@ module GlobalRegistryStubs
               "data_visibility":"public",
               "field_type":"boolean",
               "is_editable":false,
-              "unique_value":false
+              "unique_value":false,
+              "fields":[
+                  {"id":"97d1e40e-d557-11e3-8ea8-12725f8f377c",
+                  "name":"is_active",
+                  "data_visibility":"public",
+                  "field_type":"boolean",
+                  "is_editable":false,
+                  "unique_value":false
+                  },{
+                  "id":"addb95ba-d557-11e3-8422-12725f8f377c",
+                  "name":"sp_phone",
+                  "data_visibility":"public",
+                  "field_type":"string",
+                  "is_editable":false,
+                  "unique_value":false
+                  }]
               },{
               "id":"adbf4b30-d557-11e3-bbc8-12725f8f377c",
               "name":"note",
