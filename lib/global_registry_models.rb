@@ -30,5 +30,8 @@ require 'global_registry_models/relationship_type/base'
 require 'global_registry_models/relationship_type/relationship_type'
 require 'global_registry_models/relationship_type/involved_type'
 
+require 'global_registry_models/measurement_type/base'
+require 'global_registry_models/measurement_type/measurement_type'
+
 module GlobalRegistryModels
 end
