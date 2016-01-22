@@ -30,7 +30,6 @@ module GlobalRegistryModels
         end
       end
       
-
       def entity_class(module_type, object_type)
         return "GlobalRegistryModels::#{ module_type.classify }::#{ object_type.classify }".constantize 
       end
