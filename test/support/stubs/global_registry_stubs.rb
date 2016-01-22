@@ -225,6 +225,86 @@ module GlobalRegistryStubs
           "to": 2
         }
       }))
+
+    stub_request(:get, "https://test-api.global-registry.org/relationship_types").
+      with(headers: {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer test', 'User-Agent'=>'Ruby'}).
+      to_return(status: 200, headers: {}, body: %({
+        "relationship_types": [
+            {
+                "fields": [],
+                "id": "2c82ceda-346a-11e4-a7c1-2344fd6feb74",
+                "relationship1": {
+                    "entity_type": "person",
+                    "relationship_name": "husband"
+                },
+                "relationship2": {
+                    "entity_type": "person",
+                    "relationship_name": "wife"
+                },
+                "relationship_entity_type_id": "2c8244ec-346a-11e4-a7c0-e3d3f75d53d0",
+                "is_editable": true
+            },
+            {
+                "id": "2c82ceda-346a-11e4-a7c1-2344fd6feb74",
+                "relationship1": {
+                    "entity_type": "person",
+                    "relationship_name": "husband"
+                },
+                "relationship2": {
+                    "entity_type": "person",
+                    "relationship_name": "wife"
+                },
+                "relationship_entity_type_id": "2c8244ec-346a-11e4-a7c0-e3d3f75d53d0",
+                "is_editable": true
+            }
+        ],
+        "meta": {
+            "from": 1,
+            "page": 1,
+            "to": 2,
+            "total_pages": 10
+        }
+    }))
+
+    stub_request(:get, "https://test-api.global-registry.org/relationship_types?filters%5Bpage%5D=3&filters%5Bper_page%5D=15").
+      with(headers: {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer test', 'User-Agent'=>'Ruby'}).
+      to_return(status: 200, headers: {}, body: %({
+    "relationship_types": [
+        {
+            "fields": [],
+            "id": "2c82ceda-346a-11e4-a7c1-2344fd6feb74",
+            "relationship1": {
+                "entity_type": "person",
+                "relationship_name": "husband"
+            },
+            "relationship2": {
+                "entity_type": "person",
+                "relationship_name": "wife"
+            },
+            "relationship_entity_type_id": "2c8244ec-346a-11e4-a7c0-e3d3f75d53d0",
+            "is_editable": true
+        },
+        {
+            "id": "2c82ceda-346a-11e4-a7c1-2344fd6feb74",
+            "relationship1": {
+                "entity_type": "person",
+                "relationship_name": "husband"
+            },
+            "relationship2": {
+                "entity_type": "person",
+                "relationship_name": "wife"
+            },
+            "relationship_entity_type_id": "2c8244ec-346a-11e4-a7c0-e3d3f75d53d0",
+            "is_editable": true
+        }
+    ],
+    "meta": {
+        "from": 10,
+        "page": 5,
+        "to": 12,
+        "total_pages": 10
+    }
+}))
   end
 end
 

@@ -2,23 +2,23 @@ module GlobalRegistryModels
   module RelationshipType
     class RelationshipType < Base
       attribute :id, String
-      attribute :relationship_entity_type_1, String
-      attribute :relationship_name_1, String
-      attribute :relationship_entity_type_2, String
-      attribute :relationship_name_2, String
-      
 
       def initialize(params = {})
         super(params)
-        create_fields(params["fields"]) if params["fields"]
+        create_involved_types([params["relationship1"],params["relationship2"]]) if params["relationship1"] && params["relationship2"]
       end
 
-      def fields
-        @fields
+      def involved_types
+        @involved_types
       end
 
-      def self.identifying_attributes
-        [:id, :relationship_entity_type_1, :relationship_name_1, :relationship_entity_type_2, :relationship_name_2]
+      private
+
+      def create_involved_types relationships
+        @involved_types=[]
+        relationships.each do |relationship|
+          @involved_types << InvolvedType.new(relationship)
+        end
       end
 
     end

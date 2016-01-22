@@ -10,8 +10,8 @@ module GlobalRegistryModels
     end
 
     def objects
-      @objects ||= build_entity_types if @response_hash['entity_types']
       @objects ||= build_entities if @response_hash['entities']
+      @objects ||= build_other_types unless @response_hash['entities']
       @objects
     end
 
@@ -19,18 +19,20 @@ module GlobalRegistryModels
 
       def build_entities
         @response_hash['entities'].collect(&:flatten).collect do |object_type, object_attributes|
-          entity_class(object_type).new(object_attributes)
+          entity_class('Entity', object_type).new(object_attributes)
         end
       end
 
-      def build_entity_types
-        @response_hash['entity_types'].collect do |object_attributes|
-          GlobalRegistryModels::EntityType::EntityType.new(object_attributes)
+      def build_other_types
+        objects_type, objects = @response_hash.first
+        objects.collect do |object_attributes|
+          entity_class(objects_type, objects_type).new(object_attributes)
         end
       end
+      
 
-      def entity_class(entity_type_string)
-        return "GlobalRegistryModels::Entity::#{ entity_type_string.classify }".constantize 
+      def entity_class(module_type, object_type)
+        return "GlobalRegistryModels::#{ module_type.classify }::#{ object_type.classify }".constantize 
       end
   end
 end

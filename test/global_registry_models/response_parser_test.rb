@@ -28,7 +28,7 @@ class GlobalRegistryModelsResponseParserTest < Minitest::Test
     assert_equal 'Mr. Test', response.objects.first.name
   end
 
-  def test_entity_types
+  def test_other_objects_types
     response = GlobalRegistryModels::ResponseParser.new entity_type_test_response
     assert_instance_of Array, response.objects
     assert_equal 3, response.objects.size
