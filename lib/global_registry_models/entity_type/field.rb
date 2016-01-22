@@ -17,6 +17,10 @@ module GlobalRegistryModels
         @fields
       end
 
+      def self.identifying_attributes
+        [:name, :description, :is_editable, :field_type]
+      end
+
     private
 
       def create_children fields
