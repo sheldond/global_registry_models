@@ -28,6 +28,7 @@ class GlobalRegistryModelsEntityTypeEntityTypeTest < Minitest::Test
     assert_instance_of GlobalRegistryModels::EntityType::EntityType, entity_type
     assert_instance_of GlobalRegistryModels::EntityType::Field, entity_type.fields.first
     assert_instance_of GlobalRegistryModels::RelationshipType::RelationshipType, entity_type.relationships.second
+    assert_instance_of GlobalRegistryModels::RelationshipType::InvolvedType, entity_type.relationships.second.involved_types.first
     assert_equal entity_type.fields.first.name, "first_field"
     assert_equal entity_type.fields.first.id, "a740308a-7412-11e4-92c1-8f55e068e2dd"
   end
