@@ -200,7 +200,14 @@ module GlobalRegistryStubs
                   "field_type":"string",
                   "is_editable":false,
                   "unique_value":false
-                  }]
+                  }],
+                "relationships":
+                [{"relationship_type":{
+                  "id":"7cd27938-d558-11e3-868a-12725f8f377c",
+                  "relationship_entity_type_id":"b4c69f8e-db86-11e3-acf9-12725f8f377c",
+                  "relationship1":{"entity_type":"person","relationship_name":"person"},
+                  "relationship2":{"entity_type":"ministry","relationship_name":"ministry"}
+                  }}]
               },{
               "id":"adbf4b30-d557-11e3-bbc8-12725f8f377c",
               "name":"note",

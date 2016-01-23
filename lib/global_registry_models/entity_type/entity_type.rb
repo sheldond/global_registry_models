@@ -13,10 +13,15 @@ module GlobalRegistryModels
       def initialize(params = {})
         super(params)
         create_fields(params["fields"]) if params["fields"]
+        create_relationships(params["relationships"]) if params["relationships"]
       end
 
       def fields
         @fields
+      end
+
+      def relationships
+        @relationships
       end
 
       def self.identifying_attributes
@@ -29,6 +34,13 @@ module GlobalRegistryModels
         @fields=[]
         fields.collect do |field|
           @fields << Field.new(field)
+        end
+      end
+
+      def create_relationships relationships
+        @relationships=[]
+        relationships.collect do |relationship|
+          @relationships << GlobalRegistryModels::RelationshipType::RelationshipType.new(relationship["relationship_type"])
         end
       end
 
