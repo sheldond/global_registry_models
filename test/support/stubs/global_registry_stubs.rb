@@ -187,21 +187,15 @@ module GlobalRegistryStubs
               "is_editable":false,
               "unique_value":false,
               "fields":[
-                  {"id":"97d1e40e-d557-11e3-8ea8-12725f8f377c",
-                  "name":"is_active",
-                  "data_visibility":"public",
-                  "field_type":"boolean",
-                  "is_editable":false,
-                  "unique_value":false
-                  },{
-                  "id":"addb95ba-d557-11e3-8422-12725f8f377c",
-                  "name":"sp_phone",
-                  "data_visibility":"public",
-                  "field_type":"string",
-                  "is_editable":false,
-                  "unique_value":false
-                  }]
-              },{
+              {"id":"00c6011a-0cfe-11e4-92e7-12c37bb2d521","name":"zip","data_visibility":"public","field_type":"string","is_editable":false,"unique_value":false},
+              {"id":"00cdf85c-0cfe-11e4-9c68-12c37bb2d521","name":"contact_name","data_visibility":"public","field_type":"string","is_editable":false,"unique_value":false},
+              {"id":"00d4e3c4-0cfe-11e4-a2d7-12c37bb2d521","name":"contact_relationship","data_visibility":"public","field_type":"string","is_editable":false,"unique_value":false},
+              {"id":"b7dacf0a-18b3-11e4-977d-12c37bb2d521","name":"active","data_visibility":"public","field_type":"boolean","is_editable":false,"unique_value":false},
+              {"id":"00dbb820-0cfe-11e4-8c69-12c37bb2d521","name":"address_type","data_visibility":"public","field_type":"string","is_editable":false,"unique_value":false},
+              {"id":"00e2a81a-0cfe-11e4-b46e-12c37bb2d521","name":"room","data_visibility":"public","field_type":"string","is_editable":false,"unique_value":false},
+              {"id":"00e988a6-0cfe-11e4-bfa4-12c37bb2d521","name":"line3","data_visibility":"public","field_type":"string","is_editable":false,"unique_value":false},
+              {"id":"00f0936c-0cfe-11e4-aa8f-12c37bb2d521","name":"line4","data_visibility":"public","field_type":"string","is_editable":false,"unique_value":false}
+              ]},{
               "id":"adbf4b30-d557-11e3-bbc8-12725f8f377c",
               "name":"note",
               "data_visibility":"public",

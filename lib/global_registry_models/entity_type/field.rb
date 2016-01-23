@@ -3,7 +3,6 @@ module GlobalRegistryModels
     class Field < Base
       attribute :id, String
       attribute :name, String
-      attribute :parent_id, String
       attribute :description, String
       attribute :is_editable, Boolean
       attribute :field_type, String
