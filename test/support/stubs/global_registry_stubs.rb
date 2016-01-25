@@ -179,6 +179,13 @@ module GlobalRegistryStubs
           "name":"ministry",
           "description":"Entity object to hold information about a ministry",
           "data_visibility":"public",
+          "relationships":
+                 [{"relationship_type":{
+                   "id":"7cd27938-d558-11e3-868a-12725f8f377c",
+                   "relationship_entity_type_id":"b4c69f8e-db86-11e3-acf9-12725f8f377c",
+                   "relationship1":{"entity_type":"person","relationship_name":"person"},
+                   "relationship2":{"entity_type":"ministry","relationship_name":"ministry"}
+                   }}],
           "fields":[
               {"id":"97d1e40e-d557-11e3-8ea8-12725f8f377c",
               "name":"is_active",
@@ -187,28 +194,15 @@ module GlobalRegistryStubs
               "is_editable":false,
               "unique_value":false,
               "fields":[
-                  {"id":"97d1e40e-d557-11e3-8ea8-12725f8f377c",
-                  "name":"is_active",
-                  "data_visibility":"public",
-                  "field_type":"boolean",
-                  "is_editable":false,
-                  "unique_value":false
-                  },{
-                  "id":"addb95ba-d557-11e3-8422-12725f8f377c",
-                  "name":"sp_phone",
-                  "data_visibility":"public",
-                  "field_type":"string",
-                  "is_editable":false,
-                  "unique_value":false
-                  }],
-                "relationships":
-                [{"relationship_type":{
-                  "id":"7cd27938-d558-11e3-868a-12725f8f377c",
-                  "relationship_entity_type_id":"b4c69f8e-db86-11e3-acf9-12725f8f377c",
-                  "relationship1":{"entity_type":"person","relationship_name":"person"},
-                  "relationship2":{"entity_type":"ministry","relationship_name":"ministry"}
-                  }}]
-              },{
+              {"id":"00c6011a-0cfe-11e4-92e7-12c37bb2d521","name":"zip","data_visibility":"public","field_type":"string","is_editable":false,"unique_value":false},
+              {"id":"00cdf85c-0cfe-11e4-9c68-12c37bb2d521","name":"contact_name","data_visibility":"public","field_type":"string","is_editable":false,"unique_value":false},
+              {"id":"00d4e3c4-0cfe-11e4-a2d7-12c37bb2d521","name":"contact_relationship","data_visibility":"public","field_type":"string","is_editable":false,"unique_value":false},
+              {"id":"b7dacf0a-18b3-11e4-977d-12c37bb2d521","name":"active","data_visibility":"public","field_type":"boolean","is_editable":false,"unique_value":false},
+              {"id":"00dbb820-0cfe-11e4-8c69-12c37bb2d521","name":"address_type","data_visibility":"public","field_type":"string","is_editable":false,"unique_value":false},
+              {"id":"00e2a81a-0cfe-11e4-b46e-12c37bb2d521","name":"room","data_visibility":"public","field_type":"string","is_editable":false,"unique_value":false},
+              {"id":"00e988a6-0cfe-11e4-bfa4-12c37bb2d521","name":"line3","data_visibility":"public","field_type":"string","is_editable":false,"unique_value":false},
+              {"id":"00f0936c-0cfe-11e4-aa8f-12c37bb2d521","name":"line4","data_visibility":"public","field_type":"string","is_editable":false,"unique_value":false}
+              ]},{
               "id":"adbf4b30-d557-11e3-bbc8-12725f8f377c",
               "name":"note",
               "data_visibility":"public",
@@ -233,47 +227,141 @@ module GlobalRegistryStubs
         }
       }))
 
-    stub_request(:get, "https://test-api.global-registry.org/relationship_types").
+    stub_request(:get, "https://test-api.global-registry.org/measurement_types").
       with(headers: {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer test', 'User-Agent'=>'Ruby'}).
       to_return(status: 200, headers: {}, body: %({
-        "relationship_types": [
+        "measurement_types": [
             {
-                "fields": [],
-                "id": "2c82ceda-346a-11e4-a7c1-2344fd6feb74",
-                "relationship1": {
-                    "entity_type": "person",
-                    "relationship_name": "husband"
-                },
-                "relationship2": {
-                    "entity_type": "person",
-                    "relationship_name": "wife"
-                },
-                "relationship_entity_type_id": "2c8244ec-346a-11e4-a7c0-e3d3f75d53d0",
-                "is_editable": true
+              "id": "672fbfc0-e0e6-11e3-8f08-12725f8f377c",
+              "name": "ActualReportingNodes",
+              "description": null,
+              "perm_link": "LMI",
+              "frequency": "monthly",
+              "unit": "people",
+              "related_entity_type_id": "896e2bae-e0d6-11e3-920e-12725f8f377c",
+              "measurements": [
+                {
+                  "id": "00d914dc-3fdd-11e4-ad72-12c37bb2d521",
+                  "period": "2014-07",
+                  "value": "3.0",
+                  "related_entity_id": "332a1aec-f1fb-11e3-bcb3-12725f8f377c"
+                }
+              ]
             },
             {
-                "id": "2c82ceda-346a-11e4-a7c1-2344fd6feb74",
-                "relationship1": {
-                    "entity_type": "person",
-                    "relationship_name": "husband"
-                },
-                "relationship2": {
-                    "entity_type": "person",
-                    "relationship_name": "wife"
-                },
-                "relationship_entity_type_id": "2c8244ec-346a-11e4-a7c0-e3d3f75d53d0",
-                "is_editable": true
+              "id": "678f31bc-e0e6-11e3-9c76-12725f8f377c",
+              "name": "PossibleReportingNodes",
+              "description": null,
+              "perm_link": "LMI",
+              "frequency": "monthly",
+              "unit": "people",
+              "related_entity_type_id": "896e2bae-e0d6-11e3-920e-12725f8f377c",
+              "measurements": [
+                {
+                  "id": "0a9e188c-3fdd-11e4-b129-12c37bb2d521",
+                  "period": "2014-07",
+                  "value": "3.0",
+                  "related_entity_id": "332a1aec-f1fb-11e3-bcb3-12725f8f377c"
+                }
+              ]
+            }
+          ],
+          "meta": {
+              "from": 1,
+              "page": 1,
+              "to": 2,
+              "total_pages": 10
+          }
+    }))
+
+    stub_request(:get, "https://test-api.global-registry.org/measurement_types?filters%5Bpage%5D=3&filters%5Bper_page%5D=15").
+      with(headers: {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer test', 'User-Agent'=>'Ruby'}).
+      to_return(status: 200, headers: {}, body: %({
+    "measurement_types": [
+            {
+              "id": "672fbfc0-e0e6-11e3-8f08-12725f8f377c",
+              "name": "ActualReportingNodes",
+              "description": null,
+              "perm_link": "LMI",
+              "frequency": "monthly",
+              "unit": "people",
+              "related_entity_type_id": "896e2bae-e0d6-11e3-920e-12725f8f377c",
+              "measurements": [
+                {
+                  "id": "00d914dc-3fdd-11e4-ad72-12c37bb2d521",
+                  "period": "2014-07",
+                  "value": "3.0",
+                  "related_entity_id": "332a1aec-f1fb-11e3-bcb3-12725f8f377c"
+                }
+              ]
+            },
+            {
+              "id": "678f31bc-e0e6-11e3-9c76-12725f8f377c",
+              "name": "PossibleReportingNodes",
+              "description": null,
+              "perm_link": "LMI",
+              "frequency": "monthly",
+              "unit": "people",
+              "related_entity_type_id": "896e2bae-e0d6-11e3-920e-12725f8f377c",
+              "measurements": [
+                {
+                  "id": "0a9e188c-3fdd-11e4-b129-12c37bb2d521",
+                  "period": "2014-07",
+                  "value": "3.0",
+                  "related_entity_id": "332a1aec-f1fb-11e3-bcb3-12725f8f377c"
+                }
+              ]
             }
         ],
         "meta": {
-            "from": 1,
-            "page": 1,
-            "to": 2,
+            "from": 10,
+            "page": 5,
+            "to": 12,
             "total_pages": 10
         }
-    }))
+}))
 
-    stub_request(:get, "https://test-api.global-registry.org/relationship_types?filters%5Bpage%5D=3&filters%5Bper_page%5D=15").
+stub_request(:get, "https://test-api.global-registry.org/relationship_types").
+      with(headers: {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer test', 'User-Agent'=>'Ruby'}).
+      to_return(status: 200, headers: {}, body: %({
+    "relationship_types": [
+        {
+            "fields": [],
+            "id": "2c82ceda-346a-11e4-a7c1-2344fd6feb74",
+            "relationship1": {
+                "entity_type": "person",
+                "relationship_name": "husband"
+            },
+            "relationship2": {
+                "entity_type": "person",
+                "relationship_name": "wife"
+            },
+            "relationship_entity_type_id": "2c8244ec-346a-11e4-a7c0-e3d3f75d53d0",
+            "is_editable": true
+        },
+        {
+            "id": "2c82ceda-346a-11e4-a7c1-2344fd6feb74",
+            "relationship1": {
+                "entity_type": "person",
+                "relationship_name": "husband"
+            },
+            "relationship2": {
+                "entity_type": "person",
+                "relationship_name": "wife"
+            },
+            "relationship_entity_type_id": "2c8244ec-346a-11e4-a7c0-e3d3f75d53d0",
+            "is_editable": true
+        }
+    ],
+    "meta": {
+        "from": 10,
+        "page": 5,
+        "to": 12,
+        "total_pages": 10
+    }
+}))
+
+stub_request(:get,  "https://test-api.global-registry.org/relationship_types?filters%5Bpage%5D=3&filters%5Bper_page%5D=15").
       with(headers: {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer test', 'User-Agent'=>'Ruby'}).
       to_return(status: 200, headers: {}, body: %({
     "relationship_types": [

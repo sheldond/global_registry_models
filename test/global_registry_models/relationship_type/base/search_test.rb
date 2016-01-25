@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class GlobalRegistryModelsEntityTypesBaseSearchTest < Minitest::Test
+class GlobalRegistryModelsRelationshipTypesBaseSearchTest < Minitest::Test
 
   def test_search_blank
     found = GlobalRegistryModels::RelationshipType::RelationshipType.search
