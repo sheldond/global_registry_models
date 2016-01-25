@@ -26,5 +26,9 @@ require 'global_registry_models/entity_type/base'
 require 'global_registry_models/entity_type/entity_type'
 require 'global_registry_models/entity_type/field'
 
+require 'global_registry_models/relationship_type/base'
+require 'global_registry_models/relationship_type/relationship_type'
+require 'global_registry_models/relationship_type/involved_type'
+
 module GlobalRegistryModels
 end
