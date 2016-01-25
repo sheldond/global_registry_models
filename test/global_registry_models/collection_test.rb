@@ -1,10 +1,10 @@
 require 'test_helper'
 
-class GlobalRegistryModelsEntityCollectionTest < Minitest::Test
+class GlobalRegistryModelsCollectionTest < Minitest::Test
 
   def test_new
-    collection = GlobalRegistryModels::Entity::Collection.new meta: {}, entities: [1, 2, 3]
-    assert_instance_of GlobalRegistryModels::Entity::Collection, collection
+    collection = GlobalRegistryModels::Collection.new meta: {}, list: [1, 2, 3]
+    assert_instance_of GlobalRegistryModels::Collection, collection
   end
 
   def test_each

@@ -18,7 +18,7 @@ GlobalRegistry.base_url = 'https://test-api.global-registry.org/'
 # A Test model that we'll use to test entities
 module GlobalRegistryModels
   module Entity
-    class Test < Entity::Base
+    class Test < Base
       attribute :id, String
       attribute :phone, String
       attribute :name, String

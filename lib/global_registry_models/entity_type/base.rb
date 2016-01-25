@@ -2,21 +2,20 @@
 # API doc at https://github.com/CruGlobal/global_registry_docs/wiki/Entities
 
 
-
 module GlobalRegistryModels
-  module Entity
+  module EntityType
     class Base < CommonBase
 
       def self.search_params
         {
-          entity_type: name
+          field_type: "entity"
         }
       end
 
       def self.global_registry_resource
-        GlobalRegistry::Entity
+        GlobalRegistry::EntityType
       end
-      
+
     end
   end
 end
