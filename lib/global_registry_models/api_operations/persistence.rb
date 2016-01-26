@@ -6,7 +6,7 @@ module GlobalRegistryModels
       module ClassMethods
 
         def ressource_type
-          global_registry_resource == GlobalRegistryModels::Entity ? 'entity' : self.class.name.to_s.downcase
+          global_registry_resource == GlobalRegistry::Entity ? 'entity' : self.class.name.to_s.downcase
         end
         def create!(attributes)
           object = new(attributes.with_indifferent_access.except(:id))
