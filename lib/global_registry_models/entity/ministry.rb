@@ -14,7 +14,7 @@ module GlobalRegistryModels
       attribute :gma_status, String
       attribute :has_ds, Boolean
       attribute :has_gcm, Boolean
-      attribute :has_lim, Boolean
+      attribute :has_llm, Boolean
       attribute :has_slm, Boolean
       attribute :is_active, Boolean
       attribute :is_fcx, Boolean
