@@ -4,12 +4,17 @@ module GlobalRegistryModels
       extend ActiveSupport::Concern
 
       module ClassMethods
+
+        def ressource_type
+          global_registry_resource == GlobalRegistryModels::Entity ? 'entity' : self.class.name.to_s.downcase
+        end
         def create!(attributes)
-          entity = new(attributes.with_indifferent_access.except(:id))
-          if entity.valid?
+          object = new(attributes.with_indifferent_access.except(:id))
+          if object.valid?
             attribute_keys_to_create = attributes.keys.collect(&:to_sym) & writeable_attributes
-            create_attributes = entity.attributes.with_indifferent_access.slice(*attribute_keys_to_create)
-            new GlobalRegistry::Entity.post({ entity: { name => create_attributes }})['entity'][name]
+            create_attributes = object.attributes.with_indifferent_access.slice(*attribute_keys_to_create)
+            
+            new global_registry_resource.post({ressource_type.to_sym => { name => create_attributes }})['entity'][name]
           else
             raise GlobalRegistryModels::RecordInvalid.new
           end
@@ -17,7 +22,7 @@ module GlobalRegistryModels
 
         def create(attributes)
           create! attributes
-        rescue GlobalRegistryModels::RecordInvalid
+          rescue GlobalRegistryModels::RecordInvalid
           false
         end
 
@@ -26,7 +31,7 @@ module GlobalRegistryModels
           if entity.valid?
             attribute_keys_to_update = (attributes.keys.collect(&:to_sym) << :client_integration_id) & writeable_attributes
             update_attributes = entity.attributes.with_indifferent_access.slice(*attribute_keys_to_update)
-            new GlobalRegistry::Entity.put(id, { entity: { name => update_attributes }})['entity'][name]
+            new global_registry_resource.put(id, {ressource_type.to_sym => { name => update_attributes }} )[ressource_type][name]
           else
             raise GlobalRegistryModels::RecordInvalid.new
           end
@@ -51,6 +56,8 @@ module GlobalRegistryModels
       def update!(update_attributes)
         self.class.update! id, { client_integration_id: client_integration_id }.with_indifferent_access.merge(update_attributes)
       end
+
+      
 
     end
   end
