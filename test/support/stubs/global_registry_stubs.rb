@@ -404,9 +404,26 @@ stub_request(:get,  "https://test-api.global-registry.org/relationship_types?fil
 ## Create entity types
 
 stub_request(:post, "https://test-api.global-registry.org/entity_types").
-  with(:body => "{\"GlobalRegistry::EntityType\":{\"name\":\"Entity Type 1\",\"description\":\"a great entity type\",\"field_type\":\"string\",\"client_integration_id\":\"1\"}}",
-       :headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer test', 'Content-Length'=>'141', 'Content-Type'=>'application/json', 'Timeout'=>'-1', 'User-Agent'=>'Ruby'}).
+  with(:body => "{\"entity_type\":{\"name\":\"Entity Type 1\",\"description\":\"a great entity type\",\"field_type\":\"string\",\"client_integration_id\":\"1\"}}",
+       :headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer test', 'Content-Length'=>'126', 'Content-Type'=>'application/json', 'Timeout'=>'-1', 'User-Agent'=>'Ruby'}).
   to_return(:status => 200, :body => "{\"entity_type\":{\"id\":\"0000-0000-0000-0001\",\"name\":\"Entity Type 1\",\"description\":\"a great entity type\",\"field_type\":\"string\",\"client_integration_id\":\"1\"}}", :headers => {})
+
+  stub_request(:post, "https://test-api.global-registry.org/entity_types").
+  with(:body => "{\"entity_type\":{\"client_integration_id\":\"1\"}}",
+         :headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer test', 'Content-Length'=>'45', 'Content-Type'=>'application/json', 'Timeout'=>'-1', 'User-Agent'=>'Ruby'}).
+  to_return(:status => 200, :body => "{\"entity_type\":{\"id\":\"0000-0000-0000-0001\",\"client_integration_id\":\"1\"}}", :headers => {})
+
+## Update entity types
+
+stub_request(:put, "https://test-api.global-registry.org/entity_types/0000-0000-0000-0001").
+  with(:body => "{\"entity_type\":{\"name\":\"Entity Type 1\",\"description\":\"a great entity type\",\"field_type\":\"string\",\"client_integration_id\":\"1\"}}",
+       :headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer test', 'Content-Length'=>'126', 'Content-Type'=>'application/json', 'Timeout'=>'-1', 'User-Agent'=>'Ruby'}).
+  to_return(:status => 200, :body => "{\"entity_type\":{\"id\":\"0000-0000-0000-0001\",\"name\":\"Entity Type 1\",\"description\":\"a great entity type\",\"field_type\":\"string\",\"client_integration_id\":\"1\"}}", :headers => {})
+
+stub_request(:put, "https://test-api.global-registry.org/entity_types/0000-0000-0000-0001").
+  with(:body => "{\"entity_type\":{\"client_integration_id\":\"1\"}}",
+       :headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer test', 'Content-Length'=>'45', 'Content-Type'=>'application/json', 'Timeout'=>'-1', 'User-Agent'=>'Ruby'}).
+   to_return(:status => 200, :body => '{"entity_type":{"client_integration_id":"1"}}', :headers => {})
 
 
   end

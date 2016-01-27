@@ -14,7 +14,7 @@ module GlobalRegistryModels
         end
 
         def attributes_hash(attributes)
-          is_entity? ? {ressource_type.to_sym => { name => attributes }} : { global_registry_resource => attributes }
+          is_entity? ? {ressource_type.to_sym => { name => attributes }} : { ressource_type => attributes }
         end
         def create!(attributes)
           object = new(attributes.with_indifferent_access.except(:id))
@@ -22,11 +22,7 @@ module GlobalRegistryModels
             attribute_keys_to_create = attributes.keys.collect(&:to_sym) & writeable_attributes
             create_attributes = object.attributes.with_indifferent_access.slice(*attribute_keys_to_create)
             response_hash = global_registry_resource.post(attributes_hash(create_attributes))[ressource_type]
-            if is_entity?
-              (new response_hash[name]) 
-            else
-              (new response_hash)
-            end
+            is_entity? ? (new response_hash[name]) : (new response_hash)
           else
             raise GlobalRegistryModels::RecordInvalid.new
           end
