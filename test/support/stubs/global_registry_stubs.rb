@@ -400,6 +400,15 @@ stub_request(:get,  "https://test-api.global-registry.org/relationship_types?fil
         "total_pages": 10
     }
 }))
+
+## Create entity types
+
+stub_request(:post, "https://test-api.global-registry.org/entity_types").
+  with(:body => "{\"GlobalRegistry::EntityType\":{\"name\":\"Entity Type 1\",\"description\":\"a great entity type\",\"field_type\":\"string\",\"client_integration_id\":\"1\"}}",
+       :headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer test', 'Content-Length'=>'141', 'Content-Type'=>'application/json', 'Timeout'=>'-1', 'User-Agent'=>'Ruby'}).
+  to_return(:status => 200, :body => "{\"entity_type\":{\"id\":\"0000-0000-0000-0001\",\"name\":\"Entity Type 1\",\"description\":\"a great entity type\",\"field_type\":\"string\",\"client_integration_id\":\"1\"}}", :headers => {})
+
+
   end
 end
 

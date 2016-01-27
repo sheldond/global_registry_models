@@ -5,16 +5,28 @@ module GlobalRegistryModels
 
       module ClassMethods
 
+        def is_entity?
+          global_registry_resource == GlobalRegistry::Entity 
+        end
+
         def ressource_type
-          global_registry_resource == GlobalRegistry::Entity ? 'entity' : self.class.name.to_s.downcase
+           is_entity? ? 'entity' : global_registry_resource.to_s.demodulize.underscore
+        end
+
+        def attributes_hash(attributes)
+          is_entity? ? {ressource_type.to_sym => { name => attributes }} : { global_registry_resource => attributes }
         end
         def create!(attributes)
           object = new(attributes.with_indifferent_access.except(:id))
           if object.valid?
             attribute_keys_to_create = attributes.keys.collect(&:to_sym) & writeable_attributes
             create_attributes = object.attributes.with_indifferent_access.slice(*attribute_keys_to_create)
-            
-            new global_registry_resource.post({ressource_type.to_sym => { name => create_attributes }})['entity'][name]
+            response_hash = global_registry_resource.post(attributes_hash(create_attributes))[ressource_type]
+            if is_entity?
+              (new response_hash[name]) 
+            else
+              (new response_hash)
+            end
           else
             raise GlobalRegistryModels::RecordInvalid.new
           end
@@ -31,7 +43,8 @@ module GlobalRegistryModels
           if entity.valid?
             attribute_keys_to_update = (attributes.keys.collect(&:to_sym) << :client_integration_id) & writeable_attributes
             update_attributes = entity.attributes.with_indifferent_access.slice(*attribute_keys_to_update)
-            new global_registry_resource.put(id, {ressource_type.to_sym => { name => update_attributes }} )[ressource_type][name]
+            response_hash = global_registry_resource.put(id, attributes_hash(update_attributes))[ressource_type]
+            is_entity? ? (new response_hash[name]) : (new response_hash)
           else
             raise GlobalRegistryModels::RecordInvalid.new
           end
