@@ -6,6 +6,7 @@ module GlobalRegistryModels
       attribute :description, String
       attribute :is_editable, Boolean
       attribute :field_type, String
+      attribute :data_visibility, String
 
       def initialize(params = {})
         super(params)
