@@ -2,7 +2,7 @@ require 'test_helper'
 
 class GlobalRegistryModelsEntityTypeBasePersistenceTest < Minitest::Test
 
-   def test_class_create_bang
+  def test_class_create_bang
     entity_type = GlobalRegistryModels::EntityType::EntityType.create!(name: 'Entity Type 1', description: 'a great entity type', field_type: 'string', client_integration_id: '1')
     assert_instance_of GlobalRegistryModels::EntityType::EntityType, entity_type
     assert_equal '0000-0000-0000-0001', entity_type.id

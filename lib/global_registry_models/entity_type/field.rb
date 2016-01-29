@@ -17,7 +17,7 @@ module GlobalRegistryModels
       end
 
       def self.identifying_attributes
-        [:name, :description, :is_editable, :field_type]
+        [:name, :description, :is_editable, :field_type, :data_visibility]
       end
 
     private

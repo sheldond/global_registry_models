@@ -274,6 +274,53 @@ module GlobalRegistryStubs
           }
     }))
 
+    stub_request(:get, "https://test-api.global-registry.org/measurement_types?filters%5Brelated_entity_type_id%5D=a0xxs00a-sx033").
+      with(headers: {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer test', 'User-Agent'=>'Ruby'}).
+      to_return(status: 200, headers: {}, body: %({
+        "measurement_types": [
+            {
+              "id": "672fbfc0-e0e6-11e3-8f08-12725f8f377c",
+              "name": "ActualReportingNodes",
+              "description": null,
+              "perm_link": "LMI",
+              "frequency": "monthly",
+              "unit": "people",
+              "related_entity_type_id": "896e2bae-e0d6-11e3-920e-12725f8f377c",
+              "measurements": [
+                {
+                  "id": "00d914dc-3fdd-11e4-ad72-12c37bb2d521",
+                  "period": "2014-07",
+                  "value": "3.0",
+                  "related_entity_id": "332a1aec-f1fb-11e3-bcb3-12725f8f377c"
+                }
+              ]
+            },
+            {
+              "id": "678f31bc-e0e6-11e3-9c76-12725f8f377c",
+              "name": "PossibleReportingNodes",
+              "description": null,
+              "perm_link": "LMI",
+              "frequency": "monthly",
+              "unit": "people",
+              "related_entity_type_id": "896e2bae-e0d6-11e3-920e-12725f8f377c",
+              "measurements": [
+                {
+                  "id": "0a9e188c-3fdd-11e4-b129-12c37bb2d521",
+                  "period": "2014-07",
+                  "value": "3.0",
+                  "related_entity_id": "332a1aec-f1fb-11e3-bcb3-12725f8f377c"
+                }
+              ]
+            }
+          ],
+          "meta": {
+              "from": 1,
+              "page": 1,
+              "to": 2,
+              "total_pages": 10
+          }
+    }))
+
     stub_request(:get, "https://test-api.global-registry.org/measurement_types?filters%5Bpage%5D=3&filters%5Bper_page%5D=15").
       with(headers: {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer test', 'User-Agent'=>'Ruby'}).
       to_return(status: 200, headers: {}, body: %({
