@@ -10,7 +10,7 @@ module GlobalRegistryModels
       attribute :unit, String
 
       def self.identifying_attributes
-        [:name, :description, :frequency, :perm_link, :unit]
+        [:related_entity_type_id, :name, :description, :frequency, :perm_link, :unit]
       end
 
 

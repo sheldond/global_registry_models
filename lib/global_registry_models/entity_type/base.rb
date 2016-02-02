@@ -16,6 +16,10 @@ module GlobalRegistryModels
         GlobalRegistry::EntityType
       end
 
+      def self.attributes_hash(attributes)
+        { 'entity_type' => attributes }
+      end
+
     end
   end
 end

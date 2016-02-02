@@ -14,6 +14,10 @@ module GlobalRegistryModels
         GlobalRegistry::RelationshipType
       end
 
+      def self.attributes_hash(attributes)
+        { 'relationship_type' => attributes }
+      end
+
     end
   end
 end

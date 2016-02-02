@@ -10,12 +10,9 @@ module GlobalRegistryModels
         end
 
         def ressource_type
-           is_entity? ? 'entity' : global_registry_resource.to_s.demodulize.underscore
+           global_registry_resource.to_s.demodulize.underscore
         end
 
-        def attributes_hash(attributes)
-          is_entity? ? {ressource_type.to_sym => { name => attributes }} : { ressource_type => attributes }
-        end
         def create!(attributes)
           object = new(attributes.with_indifferent_access.except(:id))
           if object.valid?

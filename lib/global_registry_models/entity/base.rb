@@ -16,6 +16,10 @@ module GlobalRegistryModels
       def self.global_registry_resource
         GlobalRegistry::Entity
       end
+
+      def self.attributes_hash(attributes)
+        {'entity'.to_sym => { name => attributes }} 
+      end
       
     end
   end
