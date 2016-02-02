@@ -27,7 +27,7 @@ module GlobalRegistryModels
 
         def create(attributes)
           create! attributes
-          rescue GlobalRegistryModels::RecordInvalid
+        rescue GlobalRegistryModels::RecordInvalid
           false
         end
 
@@ -48,6 +48,7 @@ module GlobalRegistryModels
         rescue GlobalRegistryModels::RecordInvalid
           false
         end
+
       end
 
       def save
