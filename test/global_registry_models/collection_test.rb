@@ -18,6 +18,10 @@ class GlobalRegistryModelsCollectionTest < Minitest::Test
     assert_equal 2, counter
   end
 
+  def test_order
+    assert_equal "Count Testalot", test_collection_first_page.order(:name).first.name
+  end
+
   def test_all
     assert_equal 2, test_collection_first_page.all.size
   end
