@@ -8,6 +8,7 @@ module GlobalRegistryModels
   class CommonBase
     include ActiveModel::Model
     include ActiveModel::Validations
+    include ActiveModel::Validations::Callbacks
     include Virtus.model
 
     include GlobalRegistryModels::APIOperations::Persistence
@@ -41,10 +42,11 @@ module GlobalRegistryModels
       attribute_names - [:id]
     end
 
-    # The name of the entity class. The entity name is required in the api responses and requests, hence the need for this class method.
-    def self.name
-      to_s.gsub(/.*::/, '').underscore
-    end
+    private
 
+    def underscore_name
+      self.name = self.name.downcase.tr(' ','_') if self.try(:name) && self.name
+    end   
   end
+
 end

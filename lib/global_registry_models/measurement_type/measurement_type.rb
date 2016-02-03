@@ -9,10 +9,12 @@ module GlobalRegistryModels
       attribute :perm_link, String
       attribute :unit, String
 
+      validates_presence_of :frequency, :unit, :perm_link, :related_entity_type_id, :name
+      after_validation :underscore_name
+
       def self.identifying_attributes
         [:related_entity_type_id, :name, :description, :frequency, :perm_link, :unit]
       end
-
 
     end
   end

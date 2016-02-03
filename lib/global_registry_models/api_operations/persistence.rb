@@ -63,9 +63,6 @@ module GlobalRegistryModels
       def update!(update_attributes)
         self.class.update! id, { client_integration_id: client_integration_id }.with_indifferent_access.merge(update_attributes)
       end
-
-      
-
     end
   end
 end

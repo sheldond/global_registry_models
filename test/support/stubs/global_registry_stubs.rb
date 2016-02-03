@@ -451,26 +451,26 @@ stub_request(:get,  "https://test-api.global-registry.org/relationship_types?fil
 ## Create entity types
 
 stub_request(:post, "https://test-api.global-registry.org/entity_types").
-  with(:body => "{\"entity_type\":{\"name\":\"Entity Type 1\",\"description\":\"a great entity type\",\"field_type\":\"string\",\"client_integration_id\":\"1\"}}",
-       :headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer test', 'Content-Length'=>'126', 'Content-Type'=>'application/json', 'Timeout'=>'-1', 'User-Agent'=>'Ruby'}).
+  with(:body => "{\"entity_type\":{\"name\":\"entity_type_1\",\"client_integration_id\":\"1\"}}",
+       :headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer test', 'Content-Length'=>'68', 'Content-Type'=>'application/json', 'Timeout'=>'-1', 'User-Agent'=>'Ruby'}).
   to_return(:status => 200, :body => "{\"entity_type\":{\"id\":\"0000-0000-0000-0001\",\"name\":\"Entity Type 1\",\"description\":\"a great entity type\",\"field_type\":\"string\",\"client_integration_id\":\"1\"}}", :headers => {})
 
   stub_request(:post, "https://test-api.global-registry.org/entity_types").
-  with(:body => "{\"entity_type\":{\"client_integration_id\":\"1\"}}",
-         :headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer test', 'Content-Length'=>'45', 'Content-Type'=>'application/json', 'Timeout'=>'-1', 'User-Agent'=>'Ruby'}).
+  with(:body => "{\"entity_type\":{\"name\":\"entity_type_1\",\"description\":\"a great entity type\",\"field_type\":\"string\",\"client_integration_id\":\"1\"}}",
+       :headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer test', 'Content-Length'=>'126', 'Content-Type'=>'application/json', 'Timeout'=>'-1', 'User-Agent'=>'Ruby'}).
   to_return(:status => 200, :body => "{\"entity_type\":{\"id\":\"0000-0000-0000-0001\",\"client_integration_id\":\"1\"}}", :headers => {})
 
 ## Update entity types
 
 stub_request(:put, "https://test-api.global-registry.org/entity_types/0000-0000-0000-0001").
-  with(:body => "{\"entity_type\":{\"name\":\"Entity Type 1\",\"description\":\"a great entity type\",\"field_type\":\"string\",\"client_integration_id\":\"1\"}}",
-       :headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer test', 'Content-Length'=>'126', 'Content-Type'=>'application/json', 'Timeout'=>'-1', 'User-Agent'=>'Ruby'}).
+  with(:body => "{\"entity_type\":{\"name\":\"entity_type_1\",\"client_integration_id\":\"1\"}}",
+       :headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer test', 'Content-Length'=>'68', 'Content-Type'=>'application/json', 'Timeout'=>'-1', 'User-Agent'=>'Ruby'}).
   to_return(:status => 200, :body => "{\"entity_type\":{\"id\":\"0000-0000-0000-0001\",\"name\":\"Entity Type 1\",\"description\":\"a great entity type\",\"field_type\":\"string\",\"client_integration_id\":\"1\"}}", :headers => {})
 
 stub_request(:put, "https://test-api.global-registry.org/entity_types/0000-0000-0000-0001").
-  with(:body => "{\"entity_type\":{\"client_integration_id\":\"1\"}}",
-       :headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer test', 'Content-Length'=>'45', 'Content-Type'=>'application/json', 'Timeout'=>'-1', 'User-Agent'=>'Ruby'}).
-   to_return(:status => 200, :body => '{"entity_type":{"client_integration_id":"1"}}', :headers => {})
+  with(:body => "{\"entity_type\":{\"name\":\"entity_type_1\",\"description\":\"a great entity type\",\"field_type\":\"string\",\"client_integration_id\":\"1\"}}",
+       :headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer test', 'Content-Length'=>'126', 'Content-Type'=>'application/json', 'Timeout'=>'-1', 'User-Agent'=>'Ruby'}).
+   to_return(:status => 200, :body => "{\"entity_type\":{\"id\":\"0000-0000-0000-0001\",\"name\":\"Entity Type 1\",\"description\":\"a great entity type\",\"field_type\":\"string\",\"client_integration_id\":\"1\"}}", :headers => {})
 
 ## Create relationship types
   
@@ -490,15 +490,26 @@ stub_request(:put, "https://test-api.global-registry.org/relationship_types/0000
 ## Create measurement types
 
 stub_request(:post, "https://test-api.global-registry.org/measurement_types").
-  with(:body => "{\"measurement_type\":{\"name\":\"New Staff\",\"perm_link\":\"LMI\",\"description\":\"A description\",\"client_integration_id\":\"1\"}}",
-       :headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer test', 'Content-Length'=>'117', 'Content-Type'=>'application/json', 'Timeout'=>'-1', 'User-Agent'=>'Ruby'}).
+  with(:body => "{\"measurement_type\":{\"name\":\"new_staff\",\"frequency\":\"1\",\"unit\":\"people\",\"perm_link\":\"LMI\",\"related_entity_type_id\":\"A009W234XXT\",\"description\":\"A description\",\"client_integration_id\":\"1\"}}",
+       :headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer test', 'Content-Length'=>'188', 'Content-Type'=>'application/json', 'Timeout'=>'-1', 'User-Agent'=>'Ruby'}).
     to_return(:status => 200, :body => '{"measurement_type":{"id":"0000-0000-0000-0001","client_integration_id":"1", "name": "New Staff","perm_link":"LMI","description":"A description"}}', :headers => {})
+
+stub_request(:post, "https://test-api.global-registry.org/measurement_types").
+  with(:body => "{\"measurement_type\":{\"name\":\"new_staff\",\"perm_link\":\"LMI\",\"frequency\":\"1\",\"unit\":\"people\",\"description\":\"A description\",\"related_entity_type_id\":\"A009W234XXT\",\"client_integration_id\":\"1\"}}",
+       :headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer test', 'Content-Length'=>'188', 'Content-Type'=>'application/json', 'Timeout'=>'-1', 'User-Agent'=>'Ruby'}).
+      to_return(:status => 200, :body => '{"measurement_type":{"id":"0000-0000-0000-0001","client_integration_id":"1", "name": "New Staff","perm_link":"LMI","description":"A description"}}', :headers => {})
+
 
 ## Update measurement types
 
 stub_request(:put, "https://test-api.global-registry.org/measurement_types/0000-0000-0000-0001").
-  with(:body => "{\"measurement_type\":{\"name\":\"New Staff\",\"perm_link\":\"LMI\",\"description\":\"A description\",\"client_integration_id\":\"1\"}}",
-       :headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer test', 'Content-Length'=>'117', 'Content-Type'=>'application/json', 'Timeout'=>'-1', 'User-Agent'=>'Ruby'}).
+  with(:body => "{\"measurement_type\":{\"name\":\"new_staff\",\"frequency\":\"1\",\"unit\":\"people\",\"perm_link\":\"LMI\",\"related_entity_type_id\":\"A009W234XXT\",\"description\":\"A description\",\"client_integration_id\":\"1\"}}",
+       :headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer test', 'Content-Length'=>'188', 'Content-Type'=>'application/json', 'Timeout'=>'-1', 'User-Agent'=>'Ruby'}).
+  to_return(:status => 200, :body => '{"measurement_type":{"id":"0000-0000-0000-0001","client_integration_id":"1", "name": "New Staff","perm_link":"LMI","description":"A description"}}', :headers => {})
+
+stub_request(:put, "https://test-api.global-registry.org/measurement_types/0000-0000-0000-0001").
+  with(:body => "{\"measurement_type\":{\"frequency\":\"1\",\"unit\":\"people\",\"name\":\"new_staff\",\"related_entity_type_id\":\"A009W234XXT\",\"perm_link\":\"LMI\",\"description\":\"A description\",\"client_integration_id\":\"1\"}}",
+   :headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer test', 'Content-Length'=>'188', 'Content-Type'=>'application/json', 'Timeout'=>'-1', 'User-Agent'=>'Ruby'}).
   to_return(:status => 200, :body => '{"measurement_type":{"id":"0000-0000-0000-0001","client_integration_id":"1", "name": "New Staff","perm_link":"LMI","description":"A description"}}', :headers => {})
 
   end

@@ -17,8 +17,8 @@ class GlobalRegistryModelsEntityTypeBasePersistenceTest < Minitest::Test
   end
 
   def test_class_create_only_updates_writeable_attributes
-    assert GlobalRegistryModels::EntityType::EntityType.create(id: 'trying-to-update-id', client_integration_id: 1)
-    assert_requested :post, 'https://test-api.global-registry.org/entity_types', body: '{"entity_type":{"client_integration_id":"1"}}'
+    assert GlobalRegistryModels::EntityType::EntityType.create(id: 'trying-to-update-id',name: 'Entity Type 1', client_integration_id: 1)
+    assert_requested :post, 'https://test-api.global-registry.org/entity_types', body: '{"entity_type":{"name":"entity_type_1","client_integration_id":"1"}}'
   end
 
 
@@ -36,9 +36,9 @@ class GlobalRegistryModelsEntityTypeBasePersistenceTest < Minitest::Test
     assert_not_requested :put, "https://test-api.global-registry.org/entity_types/0000-0000-0000-0001"
   end
 
-   def test_class_update_only_updates_writeable_attributes
-    assert GlobalRegistryModels::EntityType::EntityType.update('0000-0000-0000-0001', {id: 'trying-to-update-id', client_integration_id: 1})
-    assert_requested :put, 'https://test-api.global-registry.org/entity_types/0000-0000-0000-0001', body: '{"entity_type":{"client_integration_id":"1"}}'
+  def test_class_update_only_updates_writeable_attributes
+    assert GlobalRegistryModels::EntityType::EntityType.update('0000-0000-0000-0001', {id: 'trying-to-update-id', name: 'Entity Type 1', client_integration_id: 1})
+    assert_requested :put, 'https://test-api.global-registry.org/entity_types/0000-0000-0000-0001', body: '{"entity_type":{"name":"entity_type_1","client_integration_id":"1"}}'
   end
 
 

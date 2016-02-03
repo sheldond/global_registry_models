@@ -11,6 +11,9 @@ module GlobalRegistryModels
       attribute :unique_value, Boolean
       attribute :parent_id, String
 
+      validates_presence_of :name
+      after_validation :underscore_name
+
       def initialize(params = {})
         super(params)
         create_fields(params["fields"]) if params["fields"]
