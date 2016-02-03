@@ -6,6 +6,7 @@ require 'virtus'
 
 module GlobalRegistryModels
   class CommonBase
+
     include ActiveModel::Model
     include ActiveModel::Validations
     include ActiveModel::Validations::Callbacks
@@ -15,7 +16,6 @@ module GlobalRegistryModels
     include GlobalRegistryModels::APIOperations::Finders
     include GlobalRegistryModels::APIOperations::Search
     include GlobalRegistryModels::APIOperations::Delete
-
 
     attribute :id, String
     attribute :client_integration_id, String
@@ -45,8 +45,9 @@ module GlobalRegistryModels
     private
 
     def underscore_name
-      self.name = self.name.downcase.tr(' ','_') if self.try(:name) && self.name
+      self.name = self.name.downcase.tr(' ','_') if self.name
     end   
+
   end
 
 end
