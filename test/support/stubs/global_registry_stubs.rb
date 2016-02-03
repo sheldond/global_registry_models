@@ -512,6 +512,39 @@ stub_request(:put, "https://test-api.global-registry.org/measurement_types/0000-
    :headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer test', 'Content-Length'=>'188', 'Content-Type'=>'application/json', 'Timeout'=>'-1', 'User-Agent'=>'Ruby'}).
   to_return(:status => 200, :body => '{"measurement_type":{"id":"0000-0000-0000-0001","client_integration_id":"1", "name": "New Staff","perm_link":"LMI","description":"A description"}}', :headers => {})
 
+## Get ALL Subscriptions
+
+  stub_request(:get, "https://test-api.global-registry.org/subscriptions").
+  with(:headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer test', 'User-Agent'=>'Ruby'}).
+  to_return(:status => 200, :body => %({
+    "subscriptions": [
+            {
+                "id": "2c82ceda-346a-11e4-a7c1-2344fd6feb74",
+                "entity_type_id": "2c8244ec-346a-11e4-a7c0-e3d3f75d53d0",
+                "endpoint": "test.com"
+            }
+        ],
+        "meta": {
+            "from": 1,
+            "page": 1,
+            "to": 1,
+            "total_pages": 1
+        }
+    }))
+
+## Create Subscriptions
+
+  stub_request(:post, "https://test-api.global-registry.org/subscriptions").
+  with(:body => "{\"subscription\":{\"entity_type_id\":\"672fbfc0-e0e6-11e3-8f08-12725f8f377c\",\"endpoint\":\"test.com\",\"client_integration_id\":\"1\"}}",
+       :headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer test', 'Content-Length'=>'124', 'Content-Type'=>'application/json', 'Timeout'=>'-1', 'User-Agent'=>'Ruby'}).
+  to_return(:status => 200, :body => "", :headers => {})
+
+## Delete Subscription
+  
+  stub_request(:delete, "https://test-api.global-registry.org/subscriptions/672fbfc0-e0e6-11e3-8f08-12725f8f377c").
+  with(:headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer test', 'User-Agent'=>'Ruby'}).
+  to_return(:status => 200, :body => "", :headers => {})
+
   end
 end
 

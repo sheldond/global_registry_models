@@ -5,10 +5,6 @@ module GlobalRegistryModels
 
       module ClassMethods
 
-        def is_entity?
-          global_registry_resource == GlobalRegistry::Entity 
-        end
-
         def ressource_type
            global_registry_resource.to_s.demodulize.underscore
         end
@@ -18,8 +14,11 @@ module GlobalRegistryModels
           if object.valid?
             attribute_keys_to_create = attributes.keys.collect(&:to_sym) & writeable_attributes
             create_attributes = object.attributes.with_indifferent_access.slice(*attribute_keys_to_create)
-            response_hash = global_registry_resource.post(attributes_hash(create_attributes))[ressource_type]
-            is_entity? ? (new response_hash[name]) : (new response_hash)
+            response = global_registry_resource.post(attributes_hash(create_attributes))
+            if response.present?
+              response_hash = response[ressource_type] 
+              response_hash.has_key?(name) ? (new response_hash[name]) : (new response_hash)
+            end
           else
             raise GlobalRegistryModels::RecordInvalid.new
           end
@@ -37,7 +36,7 @@ module GlobalRegistryModels
             attribute_keys_to_update = (attributes.keys.collect(&:to_sym) << :client_integration_id) & writeable_attributes
             update_attributes = entity.attributes.with_indifferent_access.slice(*attribute_keys_to_update)
             response_hash = global_registry_resource.put(id, attributes_hash(update_attributes))[ressource_type]
-            is_entity? ? (new response_hash[name]) : (new response_hash)
+            response_hash.has_key?(name) ? (new response_hash[name]) : (new response_hash)
           else
             raise GlobalRegistryModels::RecordInvalid.new
           end

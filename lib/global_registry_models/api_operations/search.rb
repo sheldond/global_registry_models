@@ -17,10 +17,9 @@ module GlobalRegistryModels
           }).delete_if { |_, v| v.blank? }
 
           params = clean_params(filters, params)
-
           response = GlobalRegistryModels::ResponseParser.new(global_registry_resource.get(params))
-
-          Collection.new meta: response.meta, list: response.objects
+          Collection.new meta: response.meta, list: response.objects 
+          
         end
 
         def clean_params( filters, params )

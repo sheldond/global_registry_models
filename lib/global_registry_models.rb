@@ -1,5 +1,7 @@
 require 'active_support/all'
 
+require 'global_registry/subscription'
+
 require 'global_registry_models/version'
 
 require 'global_registry_models/response_parser'
@@ -32,6 +34,9 @@ require 'global_registry_models/relationship_type/involved_type'
 
 require 'global_registry_models/measurement_type/base'
 require 'global_registry_models/measurement_type/measurement_type'
+
+require 'global_registry_models/subscription/base'
+require 'global_registry_models/subscription/subscription'
 
 module GlobalRegistryModels
 end
