@@ -18,7 +18,6 @@ module GlobalRegistryModels
     include GlobalRegistryModels::APIOperations::Delete
 
     attribute :id, String
-    attribute :client_integration_id, String
     
     def self.title
       name.titleize

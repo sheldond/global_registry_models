@@ -31,10 +31,10 @@ module GlobalRegistryModels
         end
 
         def update!(id, attributes)
-          entity = new(attributes)
-          if entity.valid?
-            attribute_keys_to_update = (attributes.keys.collect(&:to_sym) << :client_integration_id) & writeable_attributes
-            update_attributes = entity.attributes.with_indifferent_access.slice(*attribute_keys_to_update)
+          object = new(attributes)
+          if object.valid?
+            attribute_keys_to_update = attributes.keys.collect(&:to_sym) & writeable_attributes
+            update_attributes = object.attributes.with_indifferent_access.slice(*attribute_keys_to_update)
             response_hash = global_registry_resource.put(id, attributes_hash(update_attributes))[ressource_type]
             response_hash.has_key?(name) ? (new response_hash[name]) : (new response_hash)
           else
