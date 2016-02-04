@@ -1,7 +1,6 @@
 module GlobalRegistryModels
   module System
     class System < Base
-      attribute :id, String
       attribute :name, String
       attribute :created_at, DateTime
       attribute :updated_at, DateTime
@@ -15,7 +14,11 @@ module GlobalRegistryModels
       validates_presence_of :name
 
       def self.identifying_attributes
-        [:id, :name, :contact_name,:contact_email, :root, :access_token, :trusted_ips]
+        [:id, :name, :contact_name, :contact_email, :permalink]
+      end
+
+      def self.identifying_root_attributes
+        [:id, :name, :contact_name, :contact_email, :permalink, :root, :access_token, :trusted_ips]
       end
 
     end
