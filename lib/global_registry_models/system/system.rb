@@ -14,11 +14,11 @@ module GlobalRegistryModels
       validates_presence_of :name
 
       def self.identifying_attributes
-        [:id, :name, :contact_name, :contact_email, :permalink]
+        [:id, :name, :contact_name, :contact_email, :permalink, :trusted_ips]
       end
 
       def self.identifying_root_attributes
-        [:id, :name, :contact_name, :contact_email, :permalink, :root, :access_token, :trusted_ips]
+        [:id, :name, :contact_name, :contact_email, :permalink, :trusted_ips, :root, :access_token]
       end
 
     end
