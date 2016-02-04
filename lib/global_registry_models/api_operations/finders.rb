@@ -24,7 +24,8 @@ module GlobalRegistryModels
         end
 
         def find(id)
-          new global_registry_resource.find(id)['entity'][name]
+          response_hash = global_registry_resource.find(id)[ressource_type]
+          response_hash.has_key?(name) ? (new response_hash[name]) : (new response_hash)
         end
 
         def page(page_number = 1)

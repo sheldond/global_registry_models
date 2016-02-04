@@ -545,6 +545,101 @@ stub_request(:put, "https://test-api.global-registry.org/measurement_types/0000-
   with(:headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer test', 'User-Agent'=>'Ruby'}).
   to_return(:status => 200, :body => "", :headers => {})
 
+## Get all systems
+
+  stub_request(:get, "https://test-api.global-registry.org/systems").
+  with(:headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer test', 'User-Agent'=>'Ruby'}).
+  to_return(:status => 200, :body => %({
+    "systems": [
+        {
+            "id": "4686168e-3f37-11e4-a741-12c37bb2d521",
+            "name": "mark knutsen",
+            "created_at": "2014-09-18T13:25:36.678Z",
+            "updated_at": "2015-04-09T18:59:07.680Z",
+            "contact_name": "Mark Knutsen",
+            "contact_email": "mark.knutsen@cru.org",
+            "permalink": "mark_knutsen"
+        },
+        {
+            "id": "14e696a6-e443-11e4-8e77-12c37bb2d521",
+            "name": "mark test",
+            "created_at": "2015-04-16T14:15:49.256Z",
+            "updated_at": "2015-04-16T14:16:21.523Z",
+            "contact_name": "Mark Knutsen",
+            "contact_email": "mark.knutsen@cru.org",
+            "permalink": "mark_test"
+        }
+      ]
+    }))
+
+## Get one system
+
+  stub_request(:get, "https://test-api.global-registry.org/systems/0000-0000-0000-0001").
+  with(:headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer test', 'User-Agent'=>'Ruby'}).
+  to_return(:status => 200, :body => %({
+    "system": {
+        "id": "0000-0000-0000-0001",
+        "name": "mark test",
+        "created_at": "2015-04-16T14:15:49.256Z",
+        "updated_at": "2015-04-16T14:16:21.523Z",
+        "contact_name": "Mark Knutsen",
+        "contact_email": "mark.knutsen@cru.org",
+        "permalink": "mark_test",
+        "root": false,
+        "is_trusted": false,
+        "access_token": "your_access_token",
+        "trusted_ips": [
+            "208.31.255.33"
+        ]
+      }
+    }))
+
+  ## Create System
+
+   stub_request(:post, "https://test-api.global-registry.org/systems").
+  with(:body => "{\"system\":{\"name\":\"system name\",\"permalink\":\"test.com\",\"root\":false}}",
+       :headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer test', 'Content-Length'=>'69', 'Content-Type'=>'application/json', 'Timeout'=>'-1', 'User-Agent'=>'Ruby'}).
+  to_return(:status => 200, :body => %({
+    "system": {
+        "id": "0000-0000-0000-0001",
+        "name": "system name",
+        "created_at": "2015-04-16T14:15:49.256Z",
+        "updated_at": "2015-04-16T14:16:21.523Z",
+        "contact_name": "Mark Knutsen",
+        "contact_email": "mark.knutsen@cru.org",
+        "permalink": "test.com",
+        "root": false,
+        "is_trusted": false,
+        "access_token": "your_access_token",
+        "trusted_ips": [
+            "208.31.255.33"
+        ]
+      }
+    }))
+
+  ## Update System
+
+  stub_request(:put, "https://test-api.global-registry.org/systems/0000-0000-0000-0001").
+  with(:body => "{\"system\":{\"name\":\"system name\",\"permalink\":\"test.com\",\"root\":false,\"client_integration_id\":null}}",
+       :headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer test', 'Content-Length'=>'98', 'Content-Type'=>'application/json', 'Timeout'=>'-1', 'User-Agent'=>'Ruby'}).
+  to_return(:status => 200, :body => %({
+    "system": {
+        "id": "0000-0000-0000-0001",
+        "name": "system name",
+        "created_at": "2015-04-16T14:15:49.256Z",
+        "updated_at": "2015-04-16T14:16:21.523Z",
+        "contact_name": "Mark Knutsen",
+        "contact_email": "mark.knutsen@cru.org",
+        "permalink": "test.com",
+        "root": false,
+        "is_trusted": false,
+        "access_token": "your_access_token",
+        "trusted_ips": [
+            "208.31.255.33"
+        ]
+      }
+    }))
+  
   end
 end
 

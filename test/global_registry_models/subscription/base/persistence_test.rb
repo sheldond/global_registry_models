@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class GlobalRegistryModelsMeasurementTypeBasePersistenceTest < Minitest::Test
+class GlobalRegistryModelsSubscriptionBasePersistenceTest < Minitest::Test
 
   def test_class_create_bang
     GlobalRegistryModels::Subscription::Subscription.create!(entity_type_id: "672fbfc0-e0e6-11e3-8f08-12725f8f377c", endpoint: "test.com", client_integration_id: 1)

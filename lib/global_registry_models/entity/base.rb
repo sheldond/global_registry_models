@@ -6,6 +6,7 @@
 module GlobalRegistryModels
   module Entity
     class Base < CommonBase
+      validates_presence_of :client_integration_id
 
       def self.search_params
         {

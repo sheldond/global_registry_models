@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class GlobalRegistryModelsSubscriptionsBaseSearchTest < Minitest::Test
+class GlobalRegistryModelsSubscriptionBaseSearchTest < Minitest::Test
 
   def test_search_blank
     found = GlobalRegistryModels::Subscription::Subscription.search

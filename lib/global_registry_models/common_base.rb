@@ -19,9 +19,7 @@ module GlobalRegistryModels
 
     attribute :id, String
     attribute :client_integration_id, String
-
-    validates_presence_of :client_integration_id
-
+    
     def self.title
       name.titleize
     end

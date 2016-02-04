@@ -6,7 +6,7 @@ module GlobalRegistryModels
     end
 
     def meta
-      @response_hash['meta']
+      @response_hash['meta'] if @response_hash['meta']
     end
 
     def objects
