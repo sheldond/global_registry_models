@@ -1,7 +1,7 @@
 require 'active_support/all'
 
 require 'global_registry/subscription'
-require 'global_registry/system'
+require 'global_registry/system_methods'
 
 require 'global_registry_models/version'
 

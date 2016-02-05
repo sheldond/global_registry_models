@@ -639,6 +639,29 @@ stub_request(:put, "https://test-api.global-registry.org/measurement_types/0000-
         ]
       }
     }))
+
+  ## Reset access token
+
+  stub_request(:post, "https://test-api.global-registry.org/systems/reset_access_token?id=0000-0000-0000-0001").
+  with(:body => "null",
+       :headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer test', 'Content-Length'=>'4', 'Content-Type'=>'application/json', 'Timeout'=>'-1', 'User-Agent'=>'Ruby'}).
+  to_return(:status => 200, :body => %({
+    "system": {
+        "id": "0000-0000-0000-0001",
+        "name": "system name",
+        "created_at": "2015-04-16T14:15:49.256Z",
+        "updated_at": "2015-04-16T14:16:21.523Z",
+        "contact_name": "Mark Knutsen",
+        "contact_email": "mark.knutsen@cru.org",
+        "permalink": "test.com",
+        "root": false,
+        "is_trusted": false,
+        "access_token": "121213D12",
+        "trusted_ips": [
+            "208.31.255.33"
+        ]
+      }
+    }))
   
   end
 end
