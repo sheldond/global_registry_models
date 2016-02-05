@@ -24,7 +24,7 @@ module GlobalRegistryModels
         end
 
         def find(id)
-          new GlobalRegistry::Entity.find(id)['entity'][name]
+          new global_registry_resource.find(id)['entity'][name]
         end
 
         def page(page_number = 1)

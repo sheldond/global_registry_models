@@ -5,7 +5,7 @@ module GlobalRegistryModels
 
       module ClassMethods
         def delete(id)
-          GlobalRegistry::Entity.delete id
+          global_registry_resource.delete id
         end
       end
 

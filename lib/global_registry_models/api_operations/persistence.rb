@@ -9,7 +9,7 @@ module GlobalRegistryModels
           if entity.valid?
             attribute_keys_to_create = attributes.keys.collect(&:to_sym) & writeable_attributes
             create_attributes = entity.attributes.with_indifferent_access.slice(*attribute_keys_to_create)
-            new GlobalRegistry::Entity.post({ entity: { name => create_attributes }})['entity'][name]
+            new global_registry_resource.post({ entity: { name => create_attributes }})['entity'][name]
           else
             raise GlobalRegistryModels::RecordInvalid.new
           end
@@ -26,7 +26,7 @@ module GlobalRegistryModels
           if entity.valid?
             attribute_keys_to_update = (attributes.keys.collect(&:to_sym) << :client_integration_id) & writeable_attributes
             update_attributes = entity.attributes.with_indifferent_access.slice(*attribute_keys_to_update)
-            new GlobalRegistry::Entity.put(id, { entity: { name => update_attributes }})['entity'][name]
+            new global_registry_resource.put(id, { entity: { name => update_attributes }})['entity'][name]
           else
             raise GlobalRegistryModels::RecordInvalid.new
           end
