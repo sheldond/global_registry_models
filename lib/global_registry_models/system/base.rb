@@ -1,6 +1,7 @@
 module GlobalRegistryModels
   module System
     class Base < CommonBase
+      include GlobalRegistryModels::APIOperations::ResetAccessToken
 
       def self.search_params
         {}

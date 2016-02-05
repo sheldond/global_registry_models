@@ -1,6 +1,7 @@
 require 'active_support/all'
 
 require 'global_registry/subscription'
+require 'global_registry/system'
 
 require 'global_registry_models/version'
 
@@ -14,6 +15,8 @@ require 'global_registry_models/api_operations/persistence'
 require 'global_registry_models/api_operations/finders'
 require 'global_registry_models/api_operations/search'
 require 'global_registry_models/api_operations/delete'
+require 'global_registry_models/api_operations/reset_access_token'
+
 
 require 'global_registry_models/common_base'
 

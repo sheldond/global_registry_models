@@ -5,6 +5,12 @@ module GlobalRegistryModels
 
       module ClassMethods
 
+        def prepare_parameters(object, attributes)
+          attribute_keys = attributes.keys.collect(&:to_sym) & writeable_attributes
+          prepared_attributes = object.attributes.with_indifferent_access.slice(*attribute_keys)
+          prepared_attributes
+        end
+
         def ressource_type
            global_registry_resource.to_s.demodulize.underscore
         end
@@ -12,8 +18,7 @@ module GlobalRegistryModels
         def create!(attributes)
           object = new(attributes.with_indifferent_access.except(:id))
           if object.valid?
-            attribute_keys_to_create = attributes.keys.collect(&:to_sym) & writeable_attributes
-            create_attributes = object.attributes.with_indifferent_access.slice(*attribute_keys_to_create)
+            create_attributes = prepare_parameters(object, attributes)
             response = global_registry_resource.post(attributes_hash(create_attributes))
             if response.present?
               response_hash = response[ressource_type] 
@@ -33,8 +38,7 @@ module GlobalRegistryModels
         def update!(id, attributes)
           object = new(attributes)
           if object.valid?
-            attribute_keys_to_update = attributes.keys.collect(&:to_sym) & writeable_attributes
-            update_attributes = object.attributes.with_indifferent_access.slice(*attribute_keys_to_update)
+            update_attributes = prepare_parameters(object, attributes)
             response_hash = global_registry_resource.put(id, attributes_hash(update_attributes))[ressource_type]
             response_hash.has_key?(name) ? (new response_hash[name]) : (new response_hash)
           else
@@ -62,6 +66,8 @@ module GlobalRegistryModels
       def update!(update_attributes)
         self.class.update! id, { client_integration_id: client_integration_id }.with_indifferent_access.merge(update_attributes)
       end
+
+      
     end
   end
 end
