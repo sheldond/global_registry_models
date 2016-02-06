@@ -14,7 +14,7 @@ module GlobalRegistryModels
       attribute :gma_status, String
       attribute :has_ds, Boolean
       attribute :has_gcm, Boolean
-      attribute :has_lim, Boolean
+      attribute :has_llm, Boolean
       attribute :has_slm, Boolean
       attribute :is_active, Boolean
       attribute :is_fcx, Boolean
@@ -39,8 +39,14 @@ module GlobalRegistryModels
       attribute :registered_name, String
       attribute :sp_phone, String
       attribute :stage, Integer
+      attribute :stage_2020_goal, String
+      attribute :stage_progress_target_month, String
+      attribute :stage_progress_target_year, String
       attribute :state, String
       attribute :url, String
+      attribute :url_facebook_page, String
+      attribute :url_twitter, String
+      attribute :url_instagram, String
       attribute :zip, String
 
       def self.identifying_attributes
