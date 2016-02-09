@@ -6,6 +6,8 @@ module GlobalRegistryModels
       attribute :description, String
       attribute :is_editable, Boolean
       attribute :field_type, String
+      attribute :data_visibility, String
+      attribute :parent_id, String
 
       def initialize(params = {})
         super(params)
@@ -17,7 +19,7 @@ module GlobalRegistryModels
       end
 
       def self.identifying_attributes
-        [:name, :description, :is_editable, :field_type]
+        [:name, :description, :is_editable, :field_type, :data_visibility, :parent_id]
       end
 
     private

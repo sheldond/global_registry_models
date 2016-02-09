@@ -1,20 +1,19 @@
 module GlobalRegistryModels
-  module EntityType
+  module System
     class Base < CommonBase
+      include GlobalRegistryModels::APIOperations::ResetAccessToken
 
       def self.search_params
-        {
-          field_type: "entity"
-        }
+        {}
       end
 
       def self.global_registry_resource
-        GlobalRegistry::EntityType
+        GlobalRegistry::System
       end
 
       def self.attributes_hash(attributes)
         { 
-          'entity_type' => attributes 
+          'system' => attributes 
         }
       end
 

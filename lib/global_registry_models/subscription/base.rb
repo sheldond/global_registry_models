@@ -1,20 +1,18 @@
 module GlobalRegistryModels
-  module EntityType
+  module Subscription
     class Base < CommonBase
 
       def self.search_params
-        {
-          field_type: "entity"
-        }
+        {}
       end
 
       def self.global_registry_resource
-        GlobalRegistry::EntityType
+        GlobalRegistry::Subscription
       end
 
       def self.attributes_hash(attributes)
         { 
-          'entity_type' => attributes 
+          'subscription' => attributes 
         }
       end
 

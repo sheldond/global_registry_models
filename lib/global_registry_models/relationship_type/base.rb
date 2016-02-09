@@ -5,6 +5,7 @@
 module GlobalRegistryModels
   module RelationshipType
     class Base < CommonBase
+      validates_presence_of :entity_type1_id, :relationship1, :entity_type2_id, :relationship2
 
       def self.search_params
         {}
@@ -12,6 +13,10 @@ module GlobalRegistryModels
 
       def self.global_registry_resource
         GlobalRegistry::RelationshipType
+      end
+
+      def self.attributes_hash(attributes)
+        { 'relationship_type' => attributes }
       end
 
     end

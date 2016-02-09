@@ -9,6 +9,10 @@ module GlobalRegistryModels
       attribute :data_visibility, String
       attribute :enum_values, Array
       attribute :unique_value, Boolean
+      attribute :parent_id, String
+
+      validates_presence_of :name
+      after_validation :underscore_name
 
       def initialize(params = {})
         super(params)
@@ -25,7 +29,7 @@ module GlobalRegistryModels
       end
 
       def self.identifying_attributes
-        [:name, :description, :is_editable, :field_type, :data_visibility]
+        [:name, :description, :is_editable, :field_type, :data_visibility, :parent_id]
       end
 
       private

@@ -14,6 +14,10 @@ module GlobalRegistryModels
         GlobalRegistry::MeasurementType
       end
 
+      def self.attributes_hash(attributes)
+        { 'measurement_type' => attributes }
+      end
+
     end
   end
 end

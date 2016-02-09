@@ -16,6 +16,11 @@ module GlobalRegistryModels
       @list.each { |object| yield object }
     end
 
+    def order(attribute)
+      @list = @list.sort_by {|obj| obj.send attribute}
+      return self
+    end
+
     def first
       @list.first
     end

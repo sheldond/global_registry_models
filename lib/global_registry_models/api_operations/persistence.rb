@@ -4,12 +4,26 @@ module GlobalRegistryModels
       extend ActiveSupport::Concern
 
       module ClassMethods
+
+        def prepare_parameters(object, attributes)
+          attribute_keys = attributes.keys.collect(&:to_sym) & writeable_attributes
+          prepared_attributes = object.attributes.with_indifferent_access.slice(*attribute_keys)
+          prepared_attributes
+        end
+
+        def ressource_type
+           global_registry_resource.to_s.demodulize.underscore
+        end
+
         def create!(attributes)
-          entity = new(attributes.with_indifferent_access.except(:id))
-          if entity.valid?
-            attribute_keys_to_create = attributes.keys.collect(&:to_sym) & writeable_attributes
-            create_attributes = entity.attributes.with_indifferent_access.slice(*attribute_keys_to_create)
-            new global_registry_resource.post({ entity: { name => create_attributes }})['entity'][name]
+          object = new(attributes.with_indifferent_access.except(:id))
+          if object.valid?
+            create_attributes = prepare_parameters(object, attributes)
+            response = global_registry_resource.post(attributes_hash(create_attributes))
+            if response.present?
+              response_hash = response[ressource_type] 
+              response_hash.has_key?(name) ? (new response_hash[name]) : (new response_hash)
+            end
           else
             raise GlobalRegistryModels::RecordInvalid.new
           end
@@ -22,11 +36,11 @@ module GlobalRegistryModels
         end
 
         def update!(id, attributes)
-          entity = new(attributes)
-          if entity.valid?
-            attribute_keys_to_update = (attributes.keys.collect(&:to_sym) << :client_integration_id) & writeable_attributes
-            update_attributes = entity.attributes.with_indifferent_access.slice(*attribute_keys_to_update)
-            new global_registry_resource.put(id, { entity: { name => update_attributes }})['entity'][name]
+          object = new(attributes)
+          if object.valid?
+            update_attributes = prepare_parameters(object, attributes)
+            response_hash = global_registry_resource.put(id, attributes_hash(update_attributes))[ressource_type]
+            response_hash.has_key?(name) ? (new response_hash[name]) : (new response_hash)
           else
             raise GlobalRegistryModels::RecordInvalid.new
           end
@@ -37,6 +51,7 @@ module GlobalRegistryModels
         rescue GlobalRegistryModels::RecordInvalid
           false
         end
+
       end
 
       def save
@@ -52,6 +67,7 @@ module GlobalRegistryModels
         self.class.update! id, { client_integration_id: client_integration_id }.with_indifferent_access.merge(update_attributes)
       end
 
+      
     end
   end
 end
