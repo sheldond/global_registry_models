@@ -21,6 +21,10 @@ module GlobalRegistryModels
         [:id, :name, :contact_name, :contact_email, :permalink, :trusted_ips, :root, :access_token]
       end
 
+      def self.find_current_system
+        find 'deadbeef-dead-beef-dead-beefdeadbeef'
+      end
+
     end
   end
 end
