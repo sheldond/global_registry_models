@@ -6,14 +6,15 @@ module GlobalRegistryModels
       module ClassMethods
 
         def search(filters: nil, page: nil, per_page: nil, order: nil, fields: nil, ruleset: nil, limit: nil, offset: nil)
-          #params = search_params(filters, name, page, per_page, order, fields, ruleset)
-          
+                  
           params = search_params.merge({ 
             page: page,
             per_page: per_page,
             order: order,
             fields: fields,
-            ruleset: ruleset
+            ruleset: ruleset,
+            limit: limit,
+            offset: offset
           }).delete_if { |_, v| v.blank? }
 
           params = clean_params(filters, params)
