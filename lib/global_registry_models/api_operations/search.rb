@@ -5,22 +5,39 @@ module GlobalRegistryModels
 
       module ClassMethods
 
-        def search(filters: nil, page: nil, per_page: nil, order: nil, fields: nil, ruleset: nil, limit: nil, offset: nil)
-                  
-          params = search_params.merge({ 
-            page: page,
-            per_page: per_page,
-            order: order,
-            fields: fields,
-            ruleset: ruleset,
-            limit: limit,
-            offset: offset
-          }).delete_if { |_, v| v.blank? }
+        def search(filters: nil, page: nil, per_page: nil, order: nil, fields: nil, ruleset: nil)
+
+          if has_meta
+            params = search_params.merge({ 
+              page: page,
+              per_page: per_page,
+              order: order,
+              fields: fields,
+              ruleset: ruleset
+            }).delete_if { |_, v| v.blank? }
+          else
+            page ||= 1
+            per_page ||= 25
+            offset = per_page.to_i * (page.to_i  - 1)
+            params = search_params.merge({ 
+              offset: offset,
+              limit: per_page
+            })
+          end
 
           params = clean_params(filters, params)
           response = GlobalRegistryModels::ResponseParser.new(global_registry_resource.get(params))
-          Collection.new meta: response.meta, list: response.objects 
-          
+          if has_meta
+            meta = response.meta
+          else
+            meta = {
+                      "page" => page,
+                      "next_page" => next_page?(per_page, response.objects.count),
+                      "from" => offset+1,
+                      "to" => offset.to_i + per_page
+                    }
+          end
+          Collection.new meta: meta, list: response.objects 
         end
 
         def clean_params( filters, params )
@@ -35,6 +52,10 @@ module GlobalRegistryModels
           end
 
           params
+        end
+
+        def next_page?(per_page, objects_count)
+          per_page == objects_count
         end
 
       end

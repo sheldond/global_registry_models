@@ -19,6 +19,10 @@ module GlobalRegistryModels
         { 'relationship_type' => attributes }
       end
 
+      def self.has_meta
+        true
+      end
+
     end
   end
 end

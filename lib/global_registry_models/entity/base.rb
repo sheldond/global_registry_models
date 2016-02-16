@@ -27,6 +27,10 @@ module GlobalRegistryModels
       def self.name
         to_s.gsub(/.*::/, '').underscore
       end
+
+      def self.has_meta
+        true
+      end
       
     end
   end
