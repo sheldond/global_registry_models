@@ -35,7 +35,7 @@ module GlobalRegistryModels
         def extract_meta_and_objects(page, per_page, response)
           return [response.meta, response.objects] unless requires_pagination?(page, per_page)
           meta = {
-                    "page" => page,
+                    "page" => page.to_i,
                     "next_page" => next_page?(per_page, response.objects.count),
                     "from" => offset(per_page, page)+1,
                     "to" => offset(per_page, page).to_i + per_page
