@@ -6,9 +6,10 @@ module GlobalRegistryModels
       module ClassMethods
 
         def search(filters: nil, page: nil, per_page: nil, order: nil, fields: nil, ruleset: nil)
-          #params = search_params(filters, name, page, per_page, order, fields, ruleset)
-          
-          params = search_params.merge({ 
+
+          params = params_by_offset_and_limit(page, per_page) if requires_pagination?(page, per_page)
+
+          params ||= search_params.merge({ 
             page: page,
             per_page: per_page,
             order: order,
@@ -18,8 +19,41 @@ module GlobalRegistryModels
 
           params = clean_params(filters, params)
           response = GlobalRegistryModels::ResponseParser.new(global_registry_resource.get(params))
-          Collection.new meta: response.meta, list: response.objects 
-          
+
+          meta, objects = extract_meta_and_objects(page, per_page, response)
+
+          Collection.new meta: meta, list: objects 
+        end
+
+        def params_by_offset_and_limit(page, per_page)
+          { 
+            offset: offset(per_page, page),
+            limit: per_page + 1
+          }
+        end
+
+        def extract_meta_and_objects(page, per_page, response)
+          return [response.meta, response.objects] unless requires_pagination?(page, per_page)
+          meta = {
+                    "page" => page.to_i,
+                    "next_page" => next_page?(per_page, response.objects.count),
+                    "from" => offset(per_page, page)+1,
+                    "to" => offset(per_page, page).to_i + per_page
+                  }
+          objects = ( next_page?(per_page, response.objects.count) ? response.objects[0...-1] : response.objects )
+          return [ meta, objects ]
+        end
+
+        def requires_pagination?(page, per_page)
+          !has_meta && page && per_page
+        end
+
+        def offset(per_page, page)
+          per_page.to_i * (page.to_i  - 1)
+        end
+
+        def next_page?(per_page, objects_count)
+          per_page + 1 == objects_count
         end
 
         def clean_params( filters, params )
