@@ -40,7 +40,8 @@ module GlobalRegistryModels
                     "from" => offset(per_page, page)+1,
                     "to" => offset(per_page, page).to_i + per_page
                   }
-          return [ meta, response.objects[0...-1] ]
+          objects = ( next_page?(per_page, response.objects.count) ? response.objects[0...-1] : response.objects )
+          return [ meta, objects ]
         end
 
         def requires_pagination?(page, per_page)
