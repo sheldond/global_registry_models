@@ -7,37 +7,52 @@ module GlobalRegistryModels
 
         def search(filters: nil, page: nil, per_page: nil, order: nil, fields: nil, ruleset: nil)
 
-          if has_meta
-            params = search_params.merge({ 
-              page: page,
-              per_page: per_page,
-              order: order,
-              fields: fields,
-              ruleset: ruleset
-            }).delete_if { |_, v| v.blank? }
-          else
-            page ||= 1
-            per_page ||= 25
-            offset = per_page.to_i * (page.to_i  - 1)
-            params = search_params.merge({ 
-              offset: offset,
-              limit: per_page
-            })
-          end
+          params = params_by_offset_and_limit(page, per_page) if requires_pagination?(page, per_page)
+
+          params ||= search_params.merge({ 
+            page: page,
+            per_page: per_page,
+            order: order,
+            fields: fields,
+            ruleset: ruleset
+          }).delete_if { |_, v| v.blank? }
 
           params = clean_params(filters, params)
           response = GlobalRegistryModels::ResponseParser.new(global_registry_resource.get(params))
-          if has_meta
-            meta = response.meta
-          else
-            meta = {
-                      "page" => page,
-                      "next_page" => next_page?(per_page, response.objects.count),
-                      "from" => offset+1,
-                      "to" => offset.to_i + per_page
-                    }
-          end
-          Collection.new meta: meta, list: response.objects 
+
+          meta, objects = extract_meta_and_objects(page, per_page, response)
+
+          Collection.new meta: meta, list: objects 
+        end
+
+        def params_by_offset_and_limit(page, per_page)
+          { 
+            offset: offset(per_page, page),
+            limit: per_page + 1
+          }
+        end
+
+        def extract_meta_and_objects(page, per_page, response)
+          return [response.meta, response.objects] unless requires_pagination?(page, per_page)
+          meta = {
+                    "page" => page,
+                    "next_page" => next_page?(per_page, response.objects.count),
+                    "from" => offset(per_page, page)+1,
+                    "to" => offset(per_page, page).to_i + per_page
+                  }
+          return [ meta, response.objects[0...-1] ]
+        end
+
+        def requires_pagination?(page, per_page)
+          !has_meta && page && per_page
+        end
+
+        def offset(per_page, page)
+          per_page.to_i * (page.to_i  - 1)
+        end
+
+        def next_page?(per_page, objects_count)
+          per_page + 1 == objects_count
         end
 
         def clean_params( filters, params )
@@ -52,10 +67,6 @@ module GlobalRegistryModels
           end
 
           params
-        end
-
-        def next_page?(per_page, objects_count)
-          per_page == objects_count
         end
 
       end
