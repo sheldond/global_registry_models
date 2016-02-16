@@ -1,8 +1,6 @@
 # A base class providing CRUD for GlobalRegistry Entities.
 # API doc at https://github.com/CruGlobal/global_registry_docs/wiki/Entities
 
-
-
 module GlobalRegistryModels
   module Entity
     class Base < CommonBase
@@ -20,7 +18,7 @@ module GlobalRegistryModels
       end
 
       def self.attributes_hash(attributes)
-        {'entity'.to_sym => { name => attributes }} 
+        {'entity'.to_sym => { name => attributes }}
       end
 
       # The name of the entity class. The entity name is required in the api responses and requests, hence the need for this class method.
@@ -31,7 +29,6 @@ module GlobalRegistryModels
       def self.has_meta
         true
       end
-      
     end
   end
 end

@@ -11,7 +11,7 @@ class GlobalRegistryModelsEntityBaseFindersTest < Minitest::Test
     end
     assert_requested :get, 'https://test-api.global-registry.org/entities?entity_type=test&page=1'
     assert_requested :get, 'https://test-api.global-registry.org/entities?entity_type=test&page=2'
-    assert_requested :get, 'https://test-api.global-registry.org/entities?entity_type=test&page=3'
+    assert_not_requested :get, 'https://test-api.global-registry.org/entities?entity_type=test&page=3'
     assert_not_requested :get, 'https://test-api.global-registry.org/entities?entity_type=test&page=4'
   end
 

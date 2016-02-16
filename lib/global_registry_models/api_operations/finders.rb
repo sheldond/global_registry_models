@@ -16,9 +16,9 @@ module GlobalRegistryModels
               sub_collection = GlobalRegistryModels::Retryer.new([Net::HTTPGatewayTimeOut, RestClient::InternalServerError], max_attempts: max_attempts).try do
                 self.search(filters: filters, page: page_num, per_page: per_page, order: order, fields: fields, ruleset: ruleset)
               end
-              break if sub_collection.blank?
               collection.concat sub_collection.all
               page_num += 1
+              break if sub_collection.blank? || sub_collection.last_page?
             end
           end
         end

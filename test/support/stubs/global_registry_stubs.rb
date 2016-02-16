@@ -473,7 +473,7 @@ stub_request(:put, "https://test-api.global-registry.org/entity_types/0000-0000-
    to_return(:status => 200, :body => "{\"entity_type\":{\"id\":\"0000-0000-0000-0001\",\"name\":\"Entity Type 1\",\"description\":\"a great entity type\",\"field_type\":\"string\"}}", :headers => {})
 
 ## Create relationship types
-  
+
 stub_request(:post, "https://test-api.global-registry.org/relationship_types").
   with(:body => "{\"relationship_type\":{\"entity_type1_id\":\"0000-1212\",\"relationship1\":\"person\",\"entity_type2_id\":\"0000-1212\",\"relationship2\":\"person\"}}",
        :headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer test', 'Content-Length'=>'133', 'Content-Type'=>'application/json', 'Timeout'=>'-1', 'User-Agent'=>'Ruby'}).
@@ -540,7 +540,7 @@ stub_request(:put, "https://test-api.global-registry.org/measurement_types/0000-
   to_return(:status => 200, :body => "", :headers => {})
 
 ## Delete Subscription
-  
+
   stub_request(:delete, "https://test-api.global-registry.org/subscriptions/672fbfc0-e0e6-11e3-8f08-12725f8f377c").
   with(:headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer test', 'User-Agent'=>'Ruby'}).
   to_return(:status => 200, :body => "", :headers => {})
@@ -646,6 +646,27 @@ stub_request(:put, "https://test-api.global-registry.org/measurement_types/0000-
       }
     }))
 
+    ## Get deadbeef system
+    stub_request(:get, "https://test-api.global-registry.org/systems/deadbeef-dead-beef-dead-beefdeadbeef").
+      with(:headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip, deflate', 'Authorization'=>'Bearer test', 'User-Agent'=>'Ruby'}).
+      to_return(:status => 200, :body => %({
+        "system": {
+            "id": "0000-0000-0000-0001",
+            "name": "dead beef system",
+            "created_at": "2015-04-16T14:15:49.256Z",
+            "updated_at": "2015-04-16T14:16:21.523Z",
+            "contact_name": "Dead Beef",
+            "contact_email": "dead.beef@cru.org",
+            "permalink": "dead_beef_test",
+            "root": false,
+            "is_trusted": false,
+            "access_token": "your_access_token",
+            "trusted_ips": [
+                "208.31.255.33"
+            ]
+          }
+        }))
+
   ## Create System
 
    stub_request(:post, "https://test-api.global-registry.org/systems").
@@ -714,7 +735,7 @@ stub_request(:put, "https://test-api.global-registry.org/measurement_types/0000-
         ]
       }
     }))
-  
+
   end
 end
 
