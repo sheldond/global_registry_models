@@ -1,5 +1,7 @@
 # Global Registry Models
 
+:warning: *Project moved to [https://github.com/CruGlobal/global_registry_models](https://github.com/CruGlobal/global_registry_models)*
+
 Provides data models for interacting with the [Global Registry](http://www.global-registry.org/). Built ontop of the [client gem global_registry](https://github.com/CruGlobal/global_registry_client).
 
 ## Installation
